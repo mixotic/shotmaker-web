@@ -68,20 +68,19 @@ export async function generateImages(params: GenerateImagesParams): Promise<Buff
   return buffers;
 }
 
-export async function getAvailableModels(apiKey: string): Promise<any> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(apiKey)}`;
-  const res = await fetch(url);
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`Gemini list models failed (${res.status}): ${text}`);
-  }
-  return res.json();
+export function getAvailableModels(): string[] {
+  return ["gemini-2.0-flash-exp", "gemini-2.0-flash-preview-image-generation"];
 }
 
 export async function testApiKey(apiKey: string): Promise<{ ok: boolean; error?: string }> {
   try {
-    // Minimal call: list models
-    await getAvailableModels(apiKey);
+    // Minimal call: list models from the API to validate the key.
+    const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(apiKey)}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(`Gemini list models failed (${res.status}): ${text}`);
+    }
     return { ok: true };
   } catch (e: any) {
     return { ok: false, error: e?.message ?? String(e) };

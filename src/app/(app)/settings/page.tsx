@@ -1,15 +1,42 @@
-"use client";
+import { desc, eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { db } from "@/db";
+import { creditTransactions, users } from "@/db/schema";
+import { SettingsClient } from "@/app/(app)/settings/_components/settings-client";
 
-import { Settings } from "lucide-react";
+export default async function SettingsPage() {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login");
+  }
 
-export default function SettingsPage() {
+  const userId = (session.user as any).id as string;
+  const [user] = await db
+    .select({ plan: users.plan, credits: users.credits })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  const transactions = await db
+    .select({
+      id: creditTransactions.id,
+      amount: creditTransactions.amount,
+      reason: creditTransactions.reason,
+      referenceId: creditTransactions.referenceId,
+      balanceAfter: creditTransactions.balanceAfter,
+      createdAt: creditTransactions.createdAt,
+    })
+    .from(creditTransactions)
+    .where(eq(creditTransactions.userId, userId))
+    .orderBy(desc(creditTransactions.createdAt))
+    .limit(10);
+
   return (
-    <div className="flex items-center justify-center h-[60vh] text-slate-400">
-      <div className="text-center">
-        <Settings className="h-12 w-12 mx-auto mb-4 text-slate-600" />
-        <h2 className="text-lg font-medium mb-2">Settings</h2>
-        <p className="text-sm">Account, billing, and API key management</p>
-      </div>
-    </div>
+    <SettingsClient
+      planId={user?.plan ?? "free"}
+      credits={user?.credits ?? 0}
+      transactions={transactions}
+    />
   );
 }

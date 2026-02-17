@@ -39,7 +39,7 @@ export function buildAssetGenerationPrompt(
   }
 
   // set
-  const user = `Create a single cinematic environment concept image of a SET / LOCATION.\n\nNo grid. No white background requirement unless it makes sense; prioritize cinematic composition.\nAspect ratio: 16:9 unless otherwise implied.\n\nSet name: ${params.name}${desc}\n\n${baseStyleBlock(params.styleValues)}`;
+  const user = `Create a single cinematic establishing-shot environment concept image of a SET / LOCATION.\n\nNo grid. No white background requirement unless it makes sense; prioritize cinematic composition and scale.\nAspect ratio: 16:9 unless otherwise implied.\n\nSet name: ${params.name}${desc}\n\n${baseStyleBlock(params.styleValues)}`;
   return `${JSON.stringify(SYSTEM_PROMPT, null, 2)}\n\n${user}`;
 }
 

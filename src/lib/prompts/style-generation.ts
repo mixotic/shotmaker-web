@@ -1,20 +1,19 @@
 const SYSTEM_PROMPT = {
-  role: "Master Visual Stylist & Concept Architect",
+  role: "Senior Visual Development Artist",
   instruction:
-    "You are a specialized AI designed to define and anchor the 'Visual DNA' for high-end video production. Your job is to generate cohesive, production-ready style values that can be applied consistently across characters, objects, environments, and shots. Keep outputs concise, specific, and visually actionable.",
+    "You generate a single preview image prompt that showcases the specified subject while matching the provided Visual DNA. Keep the description cinematic and production-ready.",
   output_format:
-    "Return ONLY valid JSON. No markdown, no commentary. The JSON must match the requested schema.",
+    "Return ONLY the final image prompt text. No JSON. No markdown. No commentary.",
   constraints: [
-    "Avoid generic adjectives without concrete visual descriptors.",
-    "Keep each value short (1–2 sentences max).",
-    "Ensure internal consistency across all fields.",
+    "Describe composition, camera framing, and background treatment.",
+    "Avoid brand names and copyrighted characters.",
+    "Keep the prompt under 12 lines.",
   ],
 };
 
-const USER_TEMPLATE = `You are generating a style preset for {SUBJECT}.
+const USER_TEMPLATE = `Generate a preview image prompt for {SUBJECT_TYPE}.
 
-Return a JSON object with the following array field:
-{GENERATE_ARRAY}
+Subject brief: {SUBJECT}
 
 Use these style anchors:
 - Visual Medium: {VISUAL_MEDIUM}
@@ -31,6 +30,9 @@ Use these style anchors:
 
 Additional style notes:
 {ADDITIONAL_STYLE_NOTES}
+
+Preview requirements:
+{REQUIREMENTS}
 `;
 
 const SUBJECT_MAP: Record<
@@ -40,6 +42,18 @@ const SUBJECT_MAP: Record<
   character: "a weathered detective in a long coat",
   object: "an ornate vintage pocket watch",
   environment: "a moody alleyway at night",
+};
+
+const REQUIREMENTS_MAP: Record<
+  "character" | "object" | "environment",
+  string
+> = {
+  character:
+    "Single full-body character concept on a clean neutral background. Clear silhouette, readable costume details, gentle studio falloff, subtle rim light. Centered framing, no props unless essential.",
+  object:
+    "Single hero object on a clean neutral background. Three-quarter angle with soft shadow, studio lighting, precise material definition, no text labels.",
+  environment:
+    "Wide establishing shot of the environment. Cinematic composition, layered depth, clear foreground/midground/background, atmospheric perspective.",
 };
 
 function applyPlaceholders(
@@ -55,19 +69,14 @@ export function buildStyleGenerationPrompt(
 ): string {
   const subject = SUBJECT_MAP[subjectType];
 
-  const generateArray =
-    subjectType === "environment"
-      ? '"styles": [ { "name": "...", "description": "..." } ]'
-      : '"styles": [ { "name": "...", "description": "..." } ]';
-
   const userPrompt = applyPlaceholders(USER_TEMPLATE, {
     ...styleValues,
+    SUBJECT_TYPE: subjectType,
     SUBJECT: subject,
-    GENERATE_ARRAY: generateArray,
+    REQUIREMENTS: REQUIREMENTS_MAP[subjectType],
     ADDITIONAL_STYLE_NOTES:
       styleValues.CUSTOM_PROMPT?.trim() || "(none)",
   });
 
-  // Combined system + user prompt (desktop-style)
   return `${JSON.stringify(SYSTEM_PROMPT, null, 2)}\n\n${userPrompt}`;
 }
