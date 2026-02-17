@@ -7,26 +7,37 @@ import {
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
-function requiredEnv(name: string): string {
+function envOrThrow(name: string): string {
   const v = process.env[name];
   if (!v) throw new Error(`Missing env var: ${name}`);
   return v;
 }
 
-const R2_BUCKET = requiredEnv("R2_BUCKET");
-const R2_PUBLIC_URL = requiredEnv("R2_PUBLIC_URL").replace(/\/+$/, "");
+let _r2: S3Client | null = null;
+function getR2(): S3Client {
+  if (!_r2) {
+    _r2 = new S3Client({
+      region: "auto",
+      endpoint: envOrThrow("R2_ENDPOINT"),
+      credentials: {
+        accessKeyId: envOrThrow("R2_ACCESS_KEY_ID"),
+        secretAccessKey: envOrThrow("R2_SECRET_ACCESS_KEY"),
+      },
+    });
+  }
+  return _r2;
+}
 
-const r2 = new S3Client({
-  region: "auto",
-  endpoint: requiredEnv("R2_ENDPOINT"),
-  credentials: {
-    accessKeyId: requiredEnv("R2_ACCESS_KEY_ID"),
-    secretAccessKey: requiredEnv("R2_SECRET_ACCESS_KEY"),
-  },
-});
+function getBucket(): string {
+  return envOrThrow("R2_BUCKET");
+}
+
+function getPublicUrl(): string {
+  return envOrThrow("R2_PUBLIC_URL").replace(/\/+$/, "");
+}
 
 export function getMediaUrl(r2Key: string): string {
-  return `${R2_PUBLIC_URL}/${r2Key}`;
+  return `${getPublicUrl()}/${r2Key}`;
 }
 
 function extFromContentType(contentType?: string): string {
@@ -67,9 +78,9 @@ export async function uploadMedia(params: UploadMediaParams): Promise<{
 
   const r2Key = `${params.userId}/${params.projectId}/${params.entityType}/${params.entityId}/draft-${draftIndex}-${imageIndex}.${ext}`;
 
-  await r2.send(
+  await getR2().send(
     new PutObjectCommand({
-      Bucket: R2_BUCKET,
+      Bucket: getBucket(),
       Key: r2Key,
       Body: params.body,
       ContentType: params.contentType,
@@ -80,9 +91,9 @@ export async function uploadMedia(params: UploadMediaParams): Promise<{
 }
 
 export async function deleteMedia(r2Key: string): Promise<void> {
-  await r2.send(
+  await getR2().send(
     new DeleteObjectCommand({
-      Bucket: R2_BUCKET,
+      Bucket: getBucket(),
       Key: r2Key,
     }),
   );
@@ -96,9 +107,9 @@ export async function deleteProjectMedia(projectId: string): Promise<number> {
   let continuationToken: string | undefined;
 
   do {
-    const res = await r2.send(
+    const res = await getR2().send(
       new ListObjectsV2Command({
-        Bucket: R2_BUCKET,
+        Bucket: getBucket(),
         ContinuationToken: continuationToken,
       }),
     );
@@ -108,12 +119,11 @@ export async function deleteProjectMedia(projectId: string): Promise<number> {
       .filter((k): k is string => !!k && k.includes(`/${projectId}/`));
 
     if (keys.length) {
-      // Delete in chunks of 1000
       for (let i = 0; i < keys.length; i += 1000) {
         const chunk = keys.slice(i, i + 1000);
-        const delRes = await r2.send(
+        const delRes = await getR2().send(
           new DeleteObjectsCommand({
-            Bucket: R2_BUCKET,
+            Bucket: getBucket(),
             Delete: { Objects: chunk.map((Key) => ({ Key })) },
           }),
         );
@@ -148,9 +158,9 @@ export async function generatePresignedUploadUrl(
   const r2Key = `${params.userId}/${params.projectId}/${params.entityType}/${params.entityId}/draft-${draftIndex}-${imageIndex}.${ext}`;
 
   const url = await getSignedUrl(
-    r2,
+    getR2(),
     new PutObjectCommand({
-      Bucket: R2_BUCKET,
+      Bucket: getBucket(),
       Key: r2Key,
       ContentType: params.contentType,
     }),

@@ -7,7 +7,7 @@ import { mediaFiles, projects, userApiKeys, users } from "@/db/schema";
 import { checkCredits, deductCredits, CREDIT_COSTS } from "@/lib/credits";
 import { compileStyleValues } from "@/lib/prompts/compile-style";
 import { buildStyleGenerationPrompt } from "@/lib/prompts/style-generation";
-import { generateImages } from "@/lib/gemini";
+import { generateImages, isValidImageModel } from "@/lib/gemini";
 import { uploadMedia } from "@/lib/r2";
 import type { NamedStyle, StyleDraft, StyleParameters, VisualStyle } from "@/types/style";
 import { getActiveValue } from "@/types/style";
@@ -133,7 +133,10 @@ export async function POST(req: NextRequest) {
     environment: buildStyleGenerationPrompt(styleValues, "environment"),
   } as const;
 
-  const modelToUse = model ?? "gemini-2.0-flash-exp";
+  const modelToUse = model ?? "gemini-2.5-flash-image";
+  if (model && !isValidImageModel(modelToUse)) {
+    return NextResponse.json({ error: "Invalid image model selected" }, { status: 400 });
+  }
   const aspectRatio = styleEntry.style.aspectRatio ?? "1:1";
 
   try {
@@ -265,8 +268,18 @@ export async function POST(req: NextRequest) {
       creditsRemaining: creditResult.credits,
     });
   } catch (error: any) {
+    const msg = error?.message ?? "Generation failed";
+    console.error("[style-gen] Error:", msg);
+
+    if (msg.includes("Access Denied") || msg.includes("AccessDenied")) {
+      return NextResponse.json(
+        { error: "R2 storage access denied. Please check your R2 API token has read/write permissions for the bucket." },
+        { status: 500 },
+      );
+    }
+
     return NextResponse.json(
-      { error: error?.message ?? "Generation failed" },
+      { error: msg },
       { status: 500 },
     );
   }

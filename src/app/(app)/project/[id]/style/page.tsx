@@ -47,10 +47,7 @@ import {
   StylePreset,
 } from "@/types/enums";
 
-const MODEL_OPTIONS = [
-  "gemini-2.0-flash-exp",
-  "gemini-2.0-flash-preview-image-generation",
-];
+import { IMAGE_MODELS } from "@/lib/gemini";
 
 const PARAM_FIELDS: { key: StyleParamKey; label: string }[] = [
   { key: "lighting", label: "Lighting" },
@@ -388,9 +385,9 @@ export default function StylePage() {
                     <SelectValue placeholder="Select model" />
                   </SelectTrigger>
                   <SelectContent>
-                    {MODEL_OPTIONS.map((model) => (
-                      <SelectItem key={model} value={model}>
-                        {model}
+                    {IMAGE_MODELS.map((m) => (
+                      <SelectItem key={m.id} value={m.id}>
+                        {m.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -536,29 +533,32 @@ export default function StylePage() {
                     </div>
                   </div>
 
+                  {activeStyle && (
                   <div className="space-y-4">
                     {PARAM_FIELDS.map((field) => (
                       <div className="space-y-2" key={field.key}>
                         <Label>{field.label}</Label>
                         <Select
-                          value={activeStyle?.presetValues[field.key] ?? ""}
+                          value={activeStyle.presetValues[field.key] || undefined}
                           onValueChange={(value) => setParameter(field.key, value, "preset")}
-                          disabled={!activeStyle}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
                           </SelectTrigger>
                           <SelectContent>
-                            {StyleParameterOptions[field.key].map((option) => (
-                              <SelectItem key={`${field.key}-${option || "empty"}`} value={option}>
-                                {option || "(none)"}
-                              </SelectItem>
-                            ))}
+                            {StyleParameterOptions[field.key]
+                              .filter((option) => option !== "")
+                              .map((option) => (
+                                <SelectItem key={`${field.key}-${option}`} value={option}>
+                                  {option}
+                                </SelectItem>
+                              ))}
                           </SelectContent>
                         </Select>
                       </div>
                     ))}
                   </div>
+                  )}
                 </div>
               )}
 

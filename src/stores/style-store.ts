@@ -55,7 +55,7 @@ export const useStyleStore = create<StyleStoreState>((set, get) => ({
   currentStyleId: null,
   isGenerating: false,
   generationProgress: "",
-  selectedModel: "gemini-2.0-flash-exp",
+  selectedModel: "gemini-2.5-flash-image",
   previewImages: [],
   currentDraftIndex: 0,
 

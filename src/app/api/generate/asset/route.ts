@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/db";
 import { generationLog, mediaFiles, projects, userApiKeys, users } from "@/db/schema";
 import { buildAssetGenerationPrompt, buildRefinementPrompt } from "@/lib/prompts/asset-generation";
-import { generateImages } from "@/lib/gemini";
+import { generateImages, isValidImageModel } from "@/lib/gemini";
 import { uploadMedia } from "@/lib/r2";
 import { checkCredits, deductCredits, CREDIT_COSTS } from "@/lib/credits";
 import type { Asset, AssetDraft, AssetParameters, ConversationMessage } from "@/types/asset";
@@ -209,6 +209,11 @@ export async function POST(req: NextRequest) {
     prompt += formatConversationHistory(conversationHistory as ConversationMessage[] | undefined);
   }
 
+  const modelToUse = model ?? "gemini-2.5-flash-image";
+  if (model && !isValidImageModel(modelToUse)) {
+    return NextResponse.json({ error: "Invalid image model selected" }, { status: 400 });
+  }
+
   const generationId = crypto.randomUUID();
   const startedAt = Date.now();
 
@@ -228,7 +233,7 @@ export async function POST(req: NextRequest) {
     const referenceBuffers = await fetchReferenceBuffers(referenceImageUrls);
     const images = await generateImages({
       prompt,
-      model: model ?? "gemini-2.0-flash-image",
+      model: modelToUse,
       apiKey,
       referenceImages: referenceBuffers,
       aspectRatio: assetType === "set" ? "16:9" : "4:3",
@@ -274,7 +279,7 @@ export async function POST(req: NextRequest) {
     const parameters: AssetParameters = {
       prompt,
       attributes,
-      aiModel: model ?? "gemini-2.0-flash-image",
+      aiModel: modelToUse,
       usedReference: referenceImageUrls.length > 0,
     };
 

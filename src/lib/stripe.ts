@@ -3,15 +3,16 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 
-function requiredEnv(name: string): string {
-  const v = process.env[name];
-  if (!v) throw new Error(`Missing env var: ${name}`);
-  return v;
-}
+let _stripe: Stripe | null = null;
 
-export const stripe = new Stripe(requiredEnv("STRIPE_SECRET_KEY"), {
-  apiVersion: "2025-02-24.acacia",
-});
+function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error("STRIPE_SECRET_KEY is not configured");
+    _stripe = new Stripe(key, { apiVersion: "2025-02-24.acacia" });
+  }
+  return _stripe;
+}
 
 function appUrl(): string {
   return (
@@ -35,7 +36,7 @@ export async function getOrCreateCustomer(
   const stripeCustomerId = existing[0]?.stripeCustomerId;
   if (stripeCustomerId) return stripeCustomerId;
 
-  const customer = await stripe.customers.create({
+  const customer = await getStripe().customers.create({
     email,
     metadata: { userId },
   });
@@ -63,7 +64,7 @@ export async function createCheckoutSession(
 
   const customerId = await getOrCreateCustomer(userId, email);
 
-  return stripe.checkout.sessions.create({
+  return getStripe().checkout.sessions.create({
     customer: customerId,
     mode,
     line_items: [{ price: priceId, quantity: 1 }],
@@ -76,7 +77,7 @@ export async function createCheckoutSession(
 export async function createCustomerPortalSession(
   customerId: string,
 ): Promise<Stripe.BillingPortal.Session> {
-  return stripe.billingPortal.sessions.create({
+  return getStripe().billingPortal.sessions.create({
     customer: customerId,
     return_url: `${appUrl()}/settings`,
   });

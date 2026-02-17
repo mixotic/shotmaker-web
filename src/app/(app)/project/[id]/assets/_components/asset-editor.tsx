@@ -33,15 +33,10 @@ import {
 import { useAssetStore } from "@/stores/asset-store";
 import type { NamedStyle } from "@/types/style";
 
-const MODEL_OPTIONS = [
-  "gemini-2.0-flash-image",
-  "gemini-1.5-pro",
-  "gemini-1.5-flash",
-];
+import { IMAGE_MODELS } from "@/lib/gemini";
 
-const CHARACTER_GENDERS = ["", "Female", "Male", "Non-binary", "Other"];
+const CHARACTER_GENDERS = ["Female", "Male", "Non-binary", "Other"];
 const CHARACTER_BUILDS = [
-  "",
   "Slim",
   "Average",
   "Athletic",
@@ -50,7 +45,6 @@ const CHARACTER_BUILDS = [
   "Heavyset",
 ];
 const CHARACTER_EXPRESSIONS = [
-  "",
   "Neutral",
   "Happy",
   "Sad",
@@ -59,7 +53,6 @@ const CHARACTER_EXPRESSIONS = [
   "Determined",
 ];
 const OBJECT_CONDITIONS = [
-  "",
   "New",
   "Clean",
   "Used",
@@ -68,7 +61,6 @@ const OBJECT_CONDITIONS = [
   "Rusty",
 ];
 const SET_TIMES = [
-  "",
   "Morning",
   "Afternoon",
   "Evening",
@@ -76,7 +68,6 @@ const SET_TIMES = [
   "Golden Hour",
 ];
 const SET_WEATHER = [
-  "",
   "Clear",
   "Overcast",
   "Rainy",
@@ -282,9 +273,9 @@ export function AssetEditor({
                     <SelectValue placeholder="Select model" />
                   </SelectTrigger>
                   <SelectContent>
-                    {MODEL_OPTIONS.map((model) => (
-                      <SelectItem key={model} value={model}>
-                        {model}
+                    {IMAGE_MODELS.map((m) => (
+                      <SelectItem key={m.id} value={m.id}>
+                        {m.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -304,7 +295,7 @@ export function AssetEditor({
                   <div className="space-y-2">
                     <Label>Gender</Label>
                     <Select
-                      value={(attributes as any).characterGender ?? ""}
+                      value={(attributes as any).characterGender || undefined}
                       onValueChange={(value) => setAttribute("characterGender", value)}
                     >
                       <SelectTrigger>
@@ -312,8 +303,8 @@ export function AssetEditor({
                       </SelectTrigger>
                       <SelectContent>
                         {CHARACTER_GENDERS.map((gender) => (
-                          <SelectItem key={gender || "none"} value={gender}>
-                            {gender || "Unspecified"}
+                          <SelectItem key={gender} value={gender}>
+                            {gender}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -322,7 +313,7 @@ export function AssetEditor({
                   <div className="space-y-2">
                     <Label>Build</Label>
                     <Select
-                      value={(attributes as any).characterBuild ?? ""}
+                      value={(attributes as any).characterBuild || undefined}
                       onValueChange={(value) => setAttribute("characterBuild", value)}
                     >
                       <SelectTrigger>
@@ -330,8 +321,8 @@ export function AssetEditor({
                       </SelectTrigger>
                       <SelectContent>
                         {CHARACTER_BUILDS.map((build) => (
-                          <SelectItem key={build || "none"} value={build}>
-                            {build || "Unspecified"}
+                          <SelectItem key={build} value={build}>
+                            {build}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -392,7 +383,7 @@ export function AssetEditor({
                   <div className="space-y-2">
                     <Label>Expression</Label>
                     <Select
-                      value={(attributes as any).characterExpression ?? ""}
+                      value={(attributes as any).characterExpression || undefined}
                       onValueChange={(value) => setAttribute("characterExpression", value)}
                     >
                       <SelectTrigger>
@@ -400,8 +391,8 @@ export function AssetEditor({
                       </SelectTrigger>
                       <SelectContent>
                         {CHARACTER_EXPRESSIONS.map((expression) => (
-                          <SelectItem key={expression || "none"} value={expression}>
-                            {expression || "Unspecified"}
+                          <SelectItem key={expression} value={expression}>
+                            {expression}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -431,7 +422,7 @@ export function AssetEditor({
                   <div className="space-y-2">
                     <Label>Condition</Label>
                     <Select
-                      value={(attributes as any).objectCondition ?? ""}
+                      value={(attributes as any).objectCondition || undefined}
                       onValueChange={(value) => setAttribute("objectCondition", value)}
                     >
                       <SelectTrigger>
@@ -439,8 +430,8 @@ export function AssetEditor({
                       </SelectTrigger>
                       <SelectContent>
                         {OBJECT_CONDITIONS.map((condition) => (
-                          <SelectItem key={condition || "none"} value={condition}>
-                            {condition || "Unspecified"}
+                          <SelectItem key={condition} value={condition}>
+                            {condition}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -481,7 +472,7 @@ export function AssetEditor({
                   <div className="space-y-2">
                     <Label>Time of day</Label>
                     <Select
-                      value={(attributes as any).setTime ?? ""}
+                      value={(attributes as any).setTime || undefined}
                       onValueChange={(value) => setAttribute("setTime", value)}
                     >
                       <SelectTrigger>
@@ -489,8 +480,8 @@ export function AssetEditor({
                       </SelectTrigger>
                       <SelectContent>
                         {SET_TIMES.map((time) => (
-                          <SelectItem key={time || "none"} value={time}>
-                            {time || "Unspecified"}
+                          <SelectItem key={time} value={time}>
+                            {time}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -499,7 +490,7 @@ export function AssetEditor({
                   <div className="space-y-2">
                     <Label>Weather</Label>
                     <Select
-                      value={(attributes as any).setWeather ?? ""}
+                      value={(attributes as any).setWeather || undefined}
                       onValueChange={(value) => setAttribute("setWeather", value)}
                     >
                       <SelectTrigger>
@@ -507,8 +498,8 @@ export function AssetEditor({
                       </SelectTrigger>
                       <SelectContent>
                         {SET_WEATHER.map((weather) => (
-                          <SelectItem key={weather || "none"} value={weather}>
-                            {weather || "Unspecified"}
+                          <SelectItem key={weather} value={weather}>
+                            {weather}
                           </SelectItem>
                         ))}
                       </SelectContent>
