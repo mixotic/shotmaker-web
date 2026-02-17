@@ -1,15 +1,836 @@
 "use client";
 
-import { Palette } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { useParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@/components/ui/resizable";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+  PlusCircle,
+  Sparkles,
+  Star,
+  Trash2,
+} from "lucide-react";
+import { useProjectStore } from "@/stores/project-store";
+import { useStyleStore } from "@/stores/style-store";
+import type { NamedStyle, StyleDraft, VisualStyle } from "@/types/style";
+import { createNamedStyle } from "@/types/style";
+import {
+  DepthOfField,
+  FilmFormat,
+  FilmGrain,
+  ImageAspectRatio,
+  Medium,
+  STYLE_PRESETS,
+  StyleParameterOptions,
+  StyleParamKey,
+  StylePreset,
+} from "@/types/enums";
+
+const MODEL_OPTIONS = [
+  "gemini-2.0-flash-exp",
+  "gemini-2.0-flash-preview-image-generation",
+];
+
+const PARAM_FIELDS: { key: StyleParamKey; label: string }[] = [
+  { key: "lighting", label: "Lighting" },
+  { key: "colorPalette", label: "Color palette" },
+  { key: "aesthetic", label: "Aesthetic" },
+  { key: "atmosphere", label: "Atmosphere" },
+  { key: "mood", label: "Mood" },
+  { key: "motion", label: "Motion" },
+  { key: "texture", label: "Texture" },
+];
+
+const QUICK_PRESET_NAMES = [
+  "Cinematic",
+  "Anime",
+  "Noir",
+  "Documentary",
+  "Fantasy",
+  "Sci-Fi",
+  "Horror",
+  "Western",
+  "Vintage",
+  "Minimalist",
+  "Surreal",
+  "Gothic",
+  "Tropical",
+  "Industrial",
+  "Ethereal",
+] as const;
+
+const buildPreset = (config: {
+  medium?: Medium;
+  filmFormat?: FilmFormat | null;
+  filmGrain?: FilmGrain | null;
+  depthOfField?: DepthOfField | null;
+  detailLevel?: number;
+  preset: Record<StyleParamKey, string>;
+  manual?: Record<StyleParamKey, string>;
+}): StylePreset => ({
+  medium: config.medium ?? Medium.photorealistic,
+  filmFormat: config.filmFormat ?? null,
+  filmGrain: config.filmGrain ?? null,
+  depthOfField: config.depthOfField ?? null,
+  detailLevel: config.detailLevel ?? 80,
+  preset: config.preset,
+  manual: config.manual ?? config.preset,
+});
+
+const QUICK_PRESETS: Record<(typeof QUICK_PRESET_NAMES)[number], StylePreset> = {
+  Cinematic: STYLE_PRESETS.Cinematic,
+  Anime: STYLE_PRESETS.Anime,
+  Noir: STYLE_PRESETS["Film Noir"],
+  Documentary: STYLE_PRESETS.Documentary,
+  Fantasy: STYLE_PRESETS.Fantasy,
+  "Sci-Fi": STYLE_PRESETS["Sci-Fi"],
+  Horror: STYLE_PRESETS.Horror,
+  Western: STYLE_PRESETS.Western,
+  Vintage: buildPreset({
+    medium: Medium.film35mm,
+    filmFormat: FilmFormat.standard,
+    filmGrain: FilmGrain.vintage,
+    depthOfField: DepthOfField.moderate,
+    detailLevel: 70,
+    preset: {
+      lighting: "Golden hour (sunrise/sunset)",
+      colorPalette: "Sepia vintage",
+      aesthetic: "Retro 80s",
+      atmosphere: "Nostalgic retro",
+      mood: "Melancholic",
+      motion: "Smooth steady movement",
+      texture: "Fine detail cinematic grain",
+    },
+  }),
+  Minimalist: buildPreset({
+    filmGrain: FilmGrain.none,
+    depthOfField: DepthOfField.deep,
+    detailLevel: 60,
+    preset: {
+      lighting: "Soft and diffused",
+      colorPalette: "Limited palette colors",
+      aesthetic: "Minimalist modern",
+      atmosphere: "Clear and bright",
+      mood: "Neutral",
+      motion: "Locked-off camera",
+      texture: "Clean cel-shaded",
+    },
+  }),
+  Surreal: buildPreset({
+    filmGrain: FilmGrain.subtle,
+    depthOfField: DepthOfField.shallow,
+    detailLevel: 80,
+    preset: {
+      lighting: "Volumetric god rays",
+      colorPalette: "Vibrant saturated colors",
+      aesthetic: "Surreal dreamlike",
+      atmosphere: "Ethereal and dreamlike",
+      mood: "Whimsical",
+      motion: "Floating dream drift",
+      texture: "Painterly brush strokes",
+    },
+  }),
+  Gothic: buildPreset({
+    medium: Medium.film35mm,
+    filmFormat: FilmFormat.standard,
+    filmGrain: FilmGrain.moderate,
+    depthOfField: DepthOfField.shallow,
+    detailLevel: 85,
+    preset: {
+      lighting: "Low-key dark lighting",
+      colorPalette: "Desaturated / washed out",
+      aesthetic: "Film noir",
+      atmosphere: "Mysterious",
+      mood: "Ominous",
+      motion: "Slow motion",
+      texture: "Grainy / organic",
+    },
+  }),
+  Tropical: buildPreset({
+    depthOfField: DepthOfField.deep,
+    detailLevel: 80,
+    preset: {
+      lighting: "Natural daylight",
+      colorPalette: "Vibrant saturated colors",
+      aesthetic: "Nature documentary",
+      atmosphere: "Warm cozy",
+      mood: "Serene",
+      motion: "Smooth steady movement",
+      texture: "Sharp and crisp",
+    },
+  }),
+  Industrial: buildPreset({
+    filmFormat: FilmFormat.standard,
+    filmGrain: FilmGrain.subtle,
+    depthOfField: DepthOfField.moderate,
+    detailLevel: 85,
+    preset: {
+      lighting: "Dramatic shadows",
+      colorPalette: "Desaturated / washed out",
+      aesthetic: "Brutalist",
+      atmosphere: "Gritty and raw",
+      mood: "Tense",
+      motion: "Handheld natural camera",
+      texture: "Rough gritty",
+    },
+  }),
+  Ethereal: buildPreset({
+    medium: Medium.watercolor,
+    filmGrain: FilmGrain.subtle,
+    depthOfField: DepthOfField.shallow,
+    detailLevel: 70,
+    preset: {
+      lighting: "Soft and diffused",
+      colorPalette: "Muted pastels",
+      aesthetic: "Watercolor painting",
+      atmosphere: "Ethereal and dreamlike",
+      mood: "Serene",
+      motion: "Fluid organic motion",
+      texture: "Watercolor paper",
+    },
+  }),
+};
+
+const STYLE_PARAM_KEYS: StyleParamKey[] = PARAM_FIELDS.map((item) => item.key);
+
+const newId = (): string => {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  return `id_${Math.random().toString(16).slice(2)}_${Date.now()}`;
+};
+
+function getDrafts(style?: VisualStyle): StyleDraft[] {
+  if (!style) return [];
+  const history = style.draftHistory ?? [];
+  const current = style.currentDraft;
+  if (!current) return history;
+  if (history.find((draft) => draft.id === current.id)) return history;
+  return [current, ...history];
+}
 
 export default function StylePage() {
-  return (
-    <div className="flex items-center justify-center h-[60vh] text-slate-400">
-      <div className="text-center">
-        <Palette className="h-12 w-12 mx-auto mb-4 text-slate-600" />
-        <h2 className="text-lg font-medium mb-2">Style Definition</h2>
-        <p className="text-sm">Define your visual style and generate reference examples</p>
+  const params = useParams();
+  const projectId = params.id as string;
+  const { currentProject, updateProjectData } = useProjectStore();
+  const {
+    currentStyleId,
+    isGenerating,
+    generationProgress,
+    selectedModel,
+    previewImages,
+    currentDraftIndex,
+    selectStyle,
+    setSelectedModel,
+    setParameter,
+    toggleMode,
+    generateStyleExamples,
+    navigateDraft,
+    setCurrentDraftIndex,
+    applyDraft,
+  } = useStyleStore();
+
+  const [error, setError] = useState<string | null>(null);
+
+  const styles = (currentProject?.projectData?.styles ?? []) as NamedStyle[];
+  const defaultStyleId = currentProject?.projectData?.defaultStyleId ?? null;
+
+  const styleIdList = useMemo(() => styles.map((style) => style.id).join("|"), [styles]);
+
+  useEffect(() => {
+    if (!styles.length) return;
+    const fallback = defaultStyleId ?? styles[0]?.id ?? null;
+    if (!currentStyleId || !styles.find((style) => style.id === currentStyleId)) {
+      selectStyle(fallback);
+    }
+  }, [styleIdList, defaultStyleId, currentStyleId, selectStyle, styles.length]);
+
+  const activeStyleEntry = useMemo(() => {
+    const resolvedId = currentStyleId ?? defaultStyleId ?? styles[0]?.id;
+    return styles.find((style) => style.id === resolvedId) ?? styles[0];
+  }, [styles, currentStyleId, defaultStyleId]);
+
+  const activeStyle = activeStyleEntry?.style;
+  const drafts = getDrafts(activeStyle);
+  const activeDraft = drafts[Math.max(0, Math.min(currentDraftIndex, drafts.length - 1))];
+  const isManualMode = !!activeStyle && STYLE_PARAM_KEYS.every((key) => activeStyle.useManual?.[key]);
+
+  const handleCreateStyle = () => {
+    if (!currentProject) return;
+    const newStyle = createNamedStyle(`Style ${styles.length + 1}`);
+    updateProjectData({
+      styles: [...styles, newStyle],
+      defaultStyleId: defaultStyleId ?? newStyle.id,
+    });
+    selectStyle(newStyle.id);
+  };
+
+  const handleDeleteStyle = (styleId: string) => {
+    if (!currentProject) return;
+    const nextStyles = styles.filter((style) => style.id !== styleId);
+    const nextDefault = defaultStyleId === styleId ? nextStyles[0]?.id ?? null : defaultStyleId;
+    updateProjectData({ styles: nextStyles, defaultStyleId: nextDefault });
+    if (currentStyleId === styleId) {
+      selectStyle(nextStyles[0]?.id ?? null);
+    }
+  };
+
+  const handleApplyPreset = (preset: StylePreset) => {
+    if (!activeStyleEntry || !currentProject) return;
+
+    const updatedStyle: NamedStyle = {
+      ...activeStyleEntry,
+      style: {
+        ...activeStyleEntry.style,
+        medium: preset.medium,
+        filmFormat: preset.filmFormat,
+        filmGrain: preset.filmGrain,
+        depthOfField: preset.depthOfField,
+        detailLevel: preset.detailLevel,
+        presetValues: { ...preset.preset },
+        manualValues: { ...preset.manual },
+        useManual: STYLE_PARAM_KEYS.reduce((acc, key) => {
+          acc[key] = false;
+          return acc;
+        }, {} as Record<StyleParamKey, boolean>),
+        isAdvancedMode: false,
+      },
+      lastUsedAt: new Date().toISOString(),
+    };
+
+    const updatedStyles = styles.map((style) =>
+      style.id === activeStyleEntry.id ? updatedStyle : style,
+    );
+
+    updateProjectData({ styles: updatedStyles });
+  };
+
+  const handleGenerate = async () => {
+    setError(null);
+    try {
+      await generateStyleExamples(projectId);
+    } catch (e: any) {
+      setError(e?.message ?? "Generation failed");
+    }
+  };
+
+  const handleApplyDraft = () => {
+    if (!activeDraft) return;
+    applyDraft(projectId);
+  };
+
+  const handleSaveAsNew = () => {
+    if (!activeStyleEntry || !currentProject) return;
+    const now = new Date().toISOString();
+    const newStyle: NamedStyle = {
+      ...activeStyleEntry,
+      id: newId(),
+      name: `${activeStyleEntry.name} Copy`,
+      createdAt: now,
+      lastUsedAt: now,
+      style: {
+        ...activeStyleEntry.style,
+        currentDraft: activeDraft ?? activeStyleEntry.style.currentDraft ?? null,
+      },
+    };
+    updateProjectData({ styles: [...styles, newStyle] });
+    selectStyle(newStyle.id);
+  };
+
+  const handleSetDefault = () => {
+    if (!activeStyleEntry) return;
+    updateProjectData({ defaultStyleId: activeStyleEntry.id });
+  };
+
+  if (!currentProject) {
+    return (
+      <div className="flex items-center justify-center h-[60vh]">
+        <Loader2 className="h-8 w-8 animate-spin text-slate-500" />
       </div>
+    );
+  }
+
+  return (
+    <div className="flex h-[calc(100vh-7rem)] flex-col gap-3">
+      {error && (
+        <div className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+          {error}
+        </div>
+      )}
+
+      <ResizablePanelGroup direction="horizontal" className="flex-1 rounded-lg border border-slate-800">
+        <ResizablePanel defaultSize={30} minSize={22} className="bg-slate-950/50">
+          <ScrollArea className="h-full">
+            <div className="space-y-6 p-4">
+              <div className="space-y-2">
+                <Label>Model</Label>
+                <Select value={selectedModel} onValueChange={setSelectedModel}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select model" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {MODEL_OPTIONS.map((model) => (
+                      <SelectItem key={model} value={model}>
+                        {model}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-4">
+                <Label>Camera styles</Label>
+
+                <div className="space-y-2">
+                  <Label className="text-xs text-slate-400">Aspect ratio</Label>
+                  <Select
+                    value={activeStyle?.aspectRatio ?? ImageAspectRatio.landscape169}
+                    onValueChange={(value) => setParameter("aspectRatio", value)}
+                    disabled={!activeStyle}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select aspect ratio" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.values(ImageAspectRatio).map((ratio) => (
+                        <SelectItem key={ratio} value={ratio}>
+                          {ratio}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-xs text-slate-400">Medium</Label>
+                  <Select
+                    value={activeStyle?.medium ?? Medium.photorealistic}
+                    onValueChange={(value) => setParameter("medium", value)}
+                    disabled={!activeStyle}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select medium" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.values(Medium).map((medium) => (
+                        <SelectItem key={medium} value={medium}>
+                          {medium}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-xs text-slate-400">Film format</Label>
+                  <Select
+                    value={activeStyle?.filmFormat ?? "none"}
+                    onValueChange={(value) => setParameter("filmFormat", value === "none" ? null : value)}
+                    disabled={!activeStyle}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select format" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">None</SelectItem>
+                      {Object.values(FilmFormat).map((format) => (
+                        <SelectItem key={format} value={format}>
+                          {format}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-xs text-slate-400">Film grain</Label>
+                  <Select
+                    value={activeStyle?.filmGrain ?? "none"}
+                    onValueChange={(value) => setParameter("filmGrain", value === "none" ? null : value)}
+                    disabled={!activeStyle}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select grain" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">None</SelectItem>
+                      {Object.values(FilmGrain).map((grain) => (
+                        <SelectItem key={grain} value={grain}>
+                          {grain}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-xs text-slate-400">Depth of field</Label>
+                  <Select
+                    value={activeStyle?.depthOfField ?? "none"}
+                    onValueChange={(value) => setParameter("depthOfField", value === "none" ? null : value)}
+                    disabled={!activeStyle}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select depth" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">None</SelectItem>
+                      {Object.values(DepthOfField).map((depth) => (
+                        <SelectItem key={depth} value={depth}>
+                          {depth}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
+                <div>
+                  <p className="text-sm font-medium text-slate-100">Manual mode</p>
+                  <p className="text-xs text-slate-400">Switch between preset and manual values</p>
+                </div>
+                <Switch
+                  checked={isManualMode}
+                  onCheckedChange={(checked) => toggleMode(checked ? "manual" : "preset")}
+                  disabled={!activeStyle}
+                />
+              </div>
+
+              {!isManualMode && (
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label>Quick presets</Label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {QUICK_PRESET_NAMES.map((name) => (
+                        <Button
+                          key={name}
+                          type="button"
+                          variant="secondary"
+                          className="justify-start"
+                          onClick={() => handleApplyPreset(QUICK_PRESETS[name])}
+                          disabled={!activeStyle}
+                        >
+                          {name}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    {PARAM_FIELDS.map((field) => (
+                      <div className="space-y-2" key={field.key}>
+                        <Label>{field.label}</Label>
+                        <Select
+                          value={activeStyle?.presetValues[field.key] ?? ""}
+                          onValueChange={(value) => setParameter(field.key, value, "preset")}
+                          disabled={!activeStyle}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {StyleParameterOptions[field.key].map((option) => (
+                              <SelectItem key={`${field.key}-${option || "empty"}`} value={option}>
+                                {option || "(none)"}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {isManualMode && (
+                <div className="space-y-4">
+                  {PARAM_FIELDS.map((field) => (
+                    <div className="space-y-2" key={field.key}>
+                      <Label>{field.label}</Label>
+                      <Input
+                        value={activeStyle?.manualValues[field.key] ?? ""}
+                        onChange={(e) => setParameter(field.key, e.target.value, "manual")}
+                        placeholder={`Describe ${field.label.toLowerCase()}`}
+                        disabled={!activeStyle}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <Label>Custom prompt</Label>
+                <Textarea
+                  value={activeStyle?.customPrompt ?? ""}
+                  onChange={(e) => setParameter("customPrompt", e.target.value)}
+                  placeholder="Add any extra style instructions..."
+                  className="min-h-[120px]"
+                  disabled={!activeStyle}
+                />
+              </div>
+
+              <Button
+                type="button"
+                className="w-full gap-2"
+                onClick={handleGenerate}
+                disabled={!activeStyle || isGenerating}
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {generationProgress || "Generating"}
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="h-4 w-4" />
+                    Generate style examples
+                  </>
+                )}
+              </Button>
+            </div>
+          </ScrollArea>
+        </ResizablePanel>
+
+        <ResizableHandle />
+
+        <ResizablePanel defaultSize={45} minSize={30} className="bg-slate-950/30">
+          <div className="flex h-full flex-col gap-4 p-4">
+            <div className="flex-1">
+              <div className="mb-3 flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-100">Style preview</h2>
+                  <p className="text-xs text-slate-400">Character, object, and environment references</p>
+                </div>
+                {activeStyleEntry && (
+                  <Badge variant="outline" className="border-slate-700 text-slate-300">
+                    {activeStyleEntry.name}
+                  </Badge>
+                )}
+              </div>
+
+              <div className="grid h-[70%] grid-cols-3 gap-3">
+                {["Character", "Object", "Set"].map((label, index) => (
+                  <Card key={label} className="flex h-full flex-col justify-between border-slate-800 bg-slate-900/40">
+                    <div className="flex-1 overflow-hidden rounded-md bg-slate-900/60">
+                      {previewImages[index] ? (
+                        <img
+                          src={previewImages[index]}
+                          alt={`${label} preview`}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-full items-center justify-center text-xs text-slate-500">
+                          No preview
+                        </div>
+                      )}
+                    </div>
+                    <div className="px-3 py-2 text-xs text-slate-400">{label}</div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleApplyDraft}
+                disabled={!activeDraft}
+              >
+                Apply Style
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleSaveAsNew}
+                disabled={!activeStyleEntry}
+              >
+                Save as New Style
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleSetDefault}
+                disabled={!activeStyleEntry}
+              >
+                Set as Default
+              </Button>
+            </div>
+          </div>
+        </ResizablePanel>
+
+        <ResizableHandle />
+
+        <ResizablePanel defaultSize={25} minSize={20} className="bg-slate-950/50">
+          <ResizablePanelGroup direction="vertical" className="h-full">
+            <ResizablePanel defaultSize={40} minSize={25} className="border-b border-slate-800">
+              <div className="flex h-full flex-col">
+                <div className="flex items-center justify-between px-4 py-3">
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-100">Styles</h3>
+                    <p className="text-xs text-slate-500">Manage named presets</p>
+                  </div>
+                  <Button size="sm" variant="secondary" className="gap-1" onClick={handleCreateStyle}>
+                    <PlusCircle className="h-4 w-4" />
+                    New
+                  </Button>
+                </div>
+
+                <ScrollArea className="flex-1">
+                  <div className="space-y-2 px-3 pb-4">
+                    {!styles.length && (
+                      <div className="rounded-md border border-dashed border-slate-800 px-3 py-4 text-xs text-slate-500">
+                        No styles yet. Create one to start.
+                      </div>
+                    )}
+                    {styles.map((style) => {
+                      const isActive = style.id === activeStyleEntry?.id;
+                      const hasReference = !!style.style?.reference;
+                      const hasDraft = !!style.style?.currentDraft;
+                      return (
+                        <div
+                          key={style.id}
+                          className={`group flex items-center justify-between rounded-md border px-3 py-2 text-sm transition ${
+                            isActive
+                              ? "border-emerald-500/60 bg-emerald-500/10"
+                              : "border-slate-800 bg-slate-900/40 hover:border-slate-700"
+                          }`}
+                        >
+                          <button
+                            type="button"
+                            className="flex flex-1 items-center gap-2 text-left"
+                            onClick={() => selectStyle(style.id)}
+                          >
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <span className="font-medium text-slate-100">{style.name}</span>
+                                {defaultStyleId === style.id && (
+                                  <Star className="h-3.5 w-3.5 text-amber-400" />
+                                )}
+                              </div>
+                              <div className="mt-1 flex flex-wrap gap-1">
+                                {hasReference && (
+                                  <Badge variant="outline" className="border-slate-700 text-[10px] text-slate-300">
+                                    Reference
+                                  </Badge>
+                                )}
+                                {hasDraft && (
+                                  <Badge variant="outline" className="border-slate-700 text-[10px] text-slate-300">
+                                    Draft
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                          </button>
+                          <Button
+                            type="button"
+                            size="icon"
+                            variant="ghost"
+                            className="opacity-0 transition group-hover:opacity-100"
+                            onClick={() => handleDeleteStyle(style.id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </ScrollArea>
+              </div>
+            </ResizablePanel>
+
+            <ResizableHandle />
+
+            <ResizablePanel defaultSize={60} minSize={35}>
+              <div className="flex h-full flex-col">
+                <div className="flex items-center justify-between px-4 py-3">
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-100">Draft history</h3>
+                    <p className="text-xs text-slate-500">Browse generated drafts</p>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => navigateDraft("prev")}
+                      disabled={!drafts.length || currentDraftIndex === 0}
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => navigateDraft("next")}
+                      disabled={!drafts.length || currentDraftIndex >= drafts.length - 1}
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                <ScrollArea className="flex-1">
+                  <div className="grid grid-cols-2 gap-3 px-4 pb-4">
+                    {!drafts.length && (
+                      <div className="col-span-2 rounded-md border border-dashed border-slate-800 px-3 py-4 text-xs text-slate-500">
+                        No drafts yet. Generate a style to populate this panel.
+                      </div>
+                    )}
+                    {drafts.map((draft, index) => (
+                      <button
+                        key={draft.id}
+                        type="button"
+                        className={`overflow-hidden rounded-md border transition ${
+                          index === currentDraftIndex
+                            ? "border-emerald-500/70"
+                            : "border-slate-800 hover:border-slate-700"
+                        }`}
+                        onClick={() => setCurrentDraftIndex(index)}
+                      >
+                        <div className="aspect-[4/3] w-full bg-slate-900/60">
+                          {draft.examples?.[0] ? (
+                            <img
+                              src={draft.examples[0]}
+                              alt={`Draft ${index + 1}`}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-full items-center justify-center text-xs text-slate-500">
+                              No preview
+                            </div>
+                          )}
+                        </div>
+                        <div className="px-2 py-1 text-xs text-slate-400">Draft {index + 1}</div>
+                      </button>
+                    ))}
+                  </div>
+                </ScrollArea>
+              </div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 }

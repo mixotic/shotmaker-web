@@ -76,6 +76,7 @@ export interface VisualStyle {
   // UI
   isAdvancedMode: boolean;
   aspectRatio: ImageAspectRatio;
+  customPrompt: string;
 
   // Draft / reference system
   currentDraft?: StyleDraft | null;
@@ -131,6 +132,7 @@ export const createDefaultVisualStyle = (): VisualStyle => {
 
     isAdvancedMode: false,
     aspectRatio: ImageAspectRatio.landscape169,
+    customPrompt: "",
 
     currentDraft: null,
     draftHistory: [],
