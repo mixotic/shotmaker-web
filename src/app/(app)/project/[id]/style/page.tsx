@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -23,14 +23,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  ChevronLeft,
-  ChevronRight,
   ImagePlus,
   Loader2,
   PlusCircle,
   Sparkles,
   Star,
   Trash2,
+  X,
 } from "lucide-react";
 import { useProjectStore } from "@/stores/project-store";
 import { useStyleStore } from "@/stores/style-store";
@@ -78,7 +77,6 @@ const QUICK_PRESET_NAMES = [
   "Comic Book",
 ] as const;
 
-// Quick presets map directly to STYLE_PRESETS — these are the Mac app's 15 presets
 const QUICK_PRESETS: Record<(typeof QUICK_PRESET_NAMES)[number], StylePreset> = {
   "70mm Epic": STYLE_PRESETS["70mm Epic"],
   Anime: STYLE_PRESETS.Anime,
@@ -113,6 +111,46 @@ function getDrafts(style?: VisualStyle): StyleDraft[] {
   return [current, ...history];
 }
 
+/* ─── Lightbox component ─── */
+function ImageLightbox({
+  src,
+  alt,
+  onClose,
+}: {
+  src: string;
+  alt: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        className="absolute right-4 top-4 rounded-full bg-slate-800/80 p-2 text-slate-300 hover:bg-slate-700 hover:text-white"
+        onClick={onClose}
+      >
+        <X className="h-5 w-5" />
+      </button>
+      <img
+        src={src}
+        alt={alt}
+        className="max-h-[85vh] max-w-[85vw] rounded-lg object-contain shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
+  );
+}
+
 export default function StylePage() {
   const params = useParams();
   const projectId = params.id as string;
@@ -129,7 +167,6 @@ export default function StylePage() {
     setParameter,
     toggleMode,
     generateStyleExamples,
-    navigateDraft,
     setCurrentDraftIndex,
     applyDraft,
   } = useStyleStore();
@@ -138,6 +175,7 @@ export default function StylePage() {
   const [editingStyleId, setEditingStyleId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
   const [isExtracting, setIsExtracting] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const extractInputRef = useRef<HTMLInputElement>(null);
 
   const styles = (currentProject?.projectData?.styles ?? []) as NamedStyle[];
@@ -161,6 +199,7 @@ export default function StylePage() {
   const activeStyle = activeStyleEntry?.style;
   const drafts = getDrafts(activeStyle);
   const activeDraft = drafts[Math.max(0, Math.min(currentDraftIndex, drafts.length - 1))];
+  const appliedDraftId = activeStyle?.reference?.id ?? null;
   const isManualMode = !!activeStyle && STYLE_PARAM_KEYS.every((key) => activeStyle.useManual?.[key]);
 
   const handleCreateStyle = () => {
@@ -202,7 +241,6 @@ export default function StylePage() {
 
       const { style: extracted } = await res.json();
 
-      // Apply extracted values to current style
       const updatedStyle: NamedStyle = {
         ...activeStyleEntry,
         style: {
@@ -214,7 +252,6 @@ export default function StylePage() {
           detailLevel: extracted.detailLevel ?? activeStyleEntry.style.detailLevel,
           manualValues: { ...extracted.manualValues },
           customPrompt: extracted.customPrompt ?? "",
-          // Switch to manual mode to show extracted text (matches Mac app)
           isAdvancedMode: true,
         },
         lastUsedAt: new Date().toISOString(),
@@ -224,8 +261,6 @@ export default function StylePage() {
         s.id === activeStyleEntry.id ? updatedStyle : s,
       );
       updateProjectData({ styles: updatedStyles });
-
-      // Also switch the UI to manual mode
       toggleMode("manual");
     } catch (e: any) {
       setError(e?.message ?? "Style extraction failed");
@@ -247,8 +282,6 @@ export default function StylePage() {
   const handleApplyPreset = (preset: StylePreset) => {
     if (!activeStyleEntry || !currentProject) return;
 
-    // Preserve current mode — Quick Styles work in both Preset and Manual modes
-    // (matches Mac app behavior: DO NOT change mode when applying a preset)
     const updatedStyle: NamedStyle = {
       ...activeStyleEntry,
       style: {
@@ -308,6 +341,8 @@ export default function StylePage() {
     updateProjectData({ defaultStyleId: activeStyleEntry.id });
   };
 
+  const closeLightbox = useCallback(() => setLightboxSrc(null), []);
+
   if (!currentProject) {
     return (
       <div className="flex items-center justify-center h-[60vh]">
@@ -317,7 +352,11 @@ export default function StylePage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-7rem)] flex-col gap-3">
+    <div className="flex h-[calc(100vh-7rem)] flex-col gap-2">
+      {lightboxSrc && (
+        <ImageLightbox src={lightboxSrc} alt="Style preview" onClose={closeLightbox} />
+      )}
+
       {error && (
         <div className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400">
           {error}
@@ -325,13 +364,14 @@ export default function StylePage() {
       )}
 
       <ResizablePanelGroup direction="horizontal" className="flex-1 rounded-lg border border-slate-800">
-        <ResizablePanel defaultSize={30} minSize={22} className="bg-slate-950/50">
+        {/* ─── Left panel: Controls ─── */}
+        <ResizablePanel defaultSize={28} minSize={22} className="bg-slate-950/50">
           <ScrollArea className="h-full">
-            <div className="space-y-6 p-4">
-              <div className="space-y-2">
-                <Label>Model</Label>
+            <div className="space-y-4 p-3">
+              <div className="space-y-1.5">
+                <Label className="text-xs">Model</Label>
                 <Select value={selectedModel} onValueChange={setSelectedModel}>
-                  <SelectTrigger>
+                  <SelectTrigger className="h-8 text-xs">
                     <SelectValue placeholder="Select model" />
                   </SelectTrigger>
                   <SelectContent>
@@ -344,17 +384,17 @@ export default function StylePage() {
                 </Select>
               </div>
 
-              <div className="space-y-4">
-                <Label>Camera styles</Label>
+              <div className="space-y-3">
+                <Label className="text-xs">Camera styles</Label>
 
-                <div className="space-y-2">
-                  <Label className="text-xs text-slate-400">Aspect ratio</Label>
+                <div className="space-y-1.5">
+                  <Label className="text-[11px] text-slate-400">Aspect ratio</Label>
                   <Select
                     value={activeStyle?.aspectRatio ?? ImageAspectRatio.landscape169}
                     onValueChange={(value) => setParameter("aspectRatio", value)}
                     disabled={!activeStyle}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-8 text-xs">
                       <SelectValue placeholder="Select aspect ratio" />
                     </SelectTrigger>
                     <SelectContent>
@@ -367,14 +407,14 @@ export default function StylePage() {
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label className="text-xs text-slate-400">Medium</Label>
+                <div className="space-y-1.5">
+                  <Label className="text-[11px] text-slate-400">Medium</Label>
                   <Select
                     value={activeStyle?.medium ?? Medium.photorealistic}
                     onValueChange={(value) => setParameter("medium", value)}
                     disabled={!activeStyle}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-8 text-xs">
                       <SelectValue placeholder="Select medium" />
                     </SelectTrigger>
                     <SelectContent>
@@ -387,14 +427,14 @@ export default function StylePage() {
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label className="text-xs text-slate-400">Film format</Label>
+                <div className="space-y-1.5">
+                  <Label className="text-[11px] text-slate-400">Film format</Label>
                   <Select
                     value={activeStyle?.filmFormat ?? "none"}
                     onValueChange={(value) => setParameter("filmFormat", value === "none" ? null : value)}
                     disabled={!activeStyle}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-8 text-xs">
                       <SelectValue placeholder="Select format" />
                     </SelectTrigger>
                     <SelectContent>
@@ -408,14 +448,14 @@ export default function StylePage() {
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label className="text-xs text-slate-400">Film grain</Label>
+                <div className="space-y-1.5">
+                  <Label className="text-[11px] text-slate-400">Film grain</Label>
                   <Select
                     value={activeStyle?.filmGrain ?? "none"}
                     onValueChange={(value) => setParameter("filmGrain", value === "none" ? null : value)}
                     disabled={!activeStyle}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-8 text-xs">
                       <SelectValue placeholder="Select grain" />
                     </SelectTrigger>
                     <SelectContent>
@@ -429,14 +469,14 @@ export default function StylePage() {
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label className="text-xs text-slate-400">Depth of field</Label>
+                <div className="space-y-1.5">
+                  <Label className="text-[11px] text-slate-400">Depth of field</Label>
                   <Select
                     value={activeStyle?.depthOfField ?? "none"}
                     onValueChange={(value) => setParameter("depthOfField", value === "none" ? null : value)}
                     disabled={!activeStyle}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-8 text-xs">
                       <SelectValue placeholder="Select depth" />
                     </SelectTrigger>
                     <SelectContent>
@@ -451,10 +491,10 @@ export default function StylePage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
+              <div className="flex items-center justify-between rounded-md border border-slate-800 bg-slate-950/60 px-2.5 py-1.5">
                 <div>
-                  <p className="text-sm font-medium text-slate-100">Manual mode</p>
-                  <p className="text-xs text-slate-400">Switch between preset and manual values</p>
+                  <p className="text-xs font-medium text-slate-100">Manual mode</p>
+                  <p className="text-[11px] text-slate-400">Preset vs manual values</p>
                 </div>
                 <Switch
                   checked={isManualMode}
@@ -463,16 +503,16 @@ export default function StylePage() {
                 />
               </div>
 
-              {/* Quick Styles — always visible in both modes */}
-              <div className="space-y-2">
-                <Label>Quick presets</Label>
-                <div className="grid grid-cols-2 gap-2">
+              {/* Quick Styles */}
+              <div className="space-y-1.5">
+                <Label className="text-xs">Quick presets</Label>
+                <div className="grid grid-cols-3 gap-1">
                   {QUICK_PRESET_NAMES.map((name) => (
                     <Button
                       key={name}
                       type="button"
                       variant="secondary"
-                      className="justify-start"
+                      className="h-auto justify-start px-2 py-1 text-[11px] leading-tight"
                       onClick={() => handleApplyPreset(QUICK_PRESETS[name])}
                       disabled={!activeStyle}
                     >
@@ -483,8 +523,8 @@ export default function StylePage() {
               </div>
 
               {/* Extract Style from Image */}
-              <div className="space-y-2">
-                <Label>Extract style from image</Label>
+              <div className="space-y-1.5">
+                <Label className="text-xs">Extract style from image</Label>
                 <input
                   ref={extractInputRef}
                   type="file"
@@ -499,38 +539,35 @@ export default function StylePage() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full gap-2"
+                  className="w-full gap-2 h-8 text-xs"
                   onClick={() => extractInputRef.current?.click()}
                   disabled={!activeStyle || isExtracting}
                 >
                   {isExtracting ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
                       Analyzing...
                     </>
                   ) : (
                     <>
-                      <ImagePlus className="h-4 w-4" />
-                      Upload Image to Extract Style
+                      <ImagePlus className="h-3.5 w-3.5" />
+                      Upload Image to Extract
                     </>
                   )}
                 </Button>
-                <p className="text-xs text-slate-400">
-                  AI will analyze the image and auto-populate all style parameters
-                </p>
               </div>
 
               {/* Preset mode: dropdown selectors */}
               {!isManualMode && activeStyle && (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {PARAM_FIELDS.map((field) => (
-                    <div className="space-y-2" key={field.key}>
-                      <Label>{field.label}</Label>
+                    <div className="space-y-1.5" key={field.key}>
+                      <Label className="text-xs">{field.label}</Label>
                       <Select
                         value={activeStyle.presetValues[field.key] || undefined}
                         onValueChange={(value) => setParameter(field.key, value, "preset")}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="h-8 text-xs">
                           <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
                         </SelectTrigger>
                         <SelectContent>
@@ -550,48 +587,48 @@ export default function StylePage() {
 
               {/* Manual mode: free-form text inputs */}
               {isManualMode && (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {PARAM_FIELDS.map((field) => (
-                    <div className="space-y-2" key={field.key}>
-                      <Label>{field.label}</Label>
+                    <div className="space-y-1.5" key={field.key}>
+                      <Label className="text-xs">{field.label}</Label>
                       <Textarea
                         value={activeStyle?.manualValues[field.key] ?? ""}
                         onChange={(e) => setParameter(field.key, e.target.value, "manual")}
                         placeholder={`Describe ${field.label.toLowerCase()}`}
                         disabled={!activeStyle}
-                        className="min-h-[80px]"
+                        className="min-h-[60px] text-xs"
                       />
                     </div>
                   ))}
                 </div>
               )}
 
-              <div className="space-y-2">
-                <Label>Custom prompt</Label>
+              <div className="space-y-1.5">
+                <Label className="text-xs">Custom prompt</Label>
                 <Textarea
                   value={activeStyle?.customPrompt ?? ""}
                   onChange={(e) => setParameter("customPrompt", e.target.value)}
                   placeholder="Add any extra style instructions..."
-                  className="min-h-[120px]"
+                  className="min-h-[80px] text-xs"
                   disabled={!activeStyle}
                 />
               </div>
 
               <Button
                 type="button"
-                className="w-full gap-2"
+                className="w-full gap-2 h-9"
                 onClick={handleGenerate}
                 disabled={!activeStyle || isGenerating}
               >
                 {isGenerating ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    {generationProgress || "Generating"}
+                    <span className="text-xs">{generationProgress || "Generating"}</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="h-4 w-4" />
-                    Generate style examples
+                    <span className="text-xs">Generate style examples</span>
                   </>
                 )}
               </Button>
@@ -601,47 +638,53 @@ export default function StylePage() {
 
         <ResizableHandle />
 
-        <ResizablePanel defaultSize={45} minSize={30} className="bg-slate-950/30">
-          <div className="flex h-full flex-col gap-4 p-4">
-            <div className="flex-1">
-              <div className="mb-3 flex items-center justify-between">
-                <div>
-                  <h2 className="text-lg font-semibold text-slate-100">Style preview</h2>
-                  <p className="text-xs text-slate-400">Character, object, and environment references</p>
-                </div>
-                {activeStyleEntry && (
-                  <Badge variant="outline" className="border-slate-700 text-slate-300">
-                    {activeStyleEntry.name}
-                  </Badge>
-                )}
+        {/* ─── Center panel: Preview ─── */}
+        <ResizablePanel defaultSize={47} minSize={30} className="bg-slate-950/30">
+          <div className="flex h-full flex-col p-3">
+            <div className="mb-3 flex items-center justify-between">
+              <div>
+                <h2 className="text-sm font-semibold text-slate-100">Style preview</h2>
+                <p className="text-[11px] text-slate-400">Character · Object · Environment</p>
               </div>
-
-              <div className="grid h-[70%] grid-cols-3 gap-3">
-                {["Character", "Object", "Set"].map((label, index) => (
-                  <Card key={label} className="flex h-full flex-col justify-between border-slate-800 bg-slate-900/40">
-                    <div className="flex-1 overflow-hidden rounded-md bg-slate-900/60">
-                      {previewImages[index] ? (
-                        <img
-                          src={previewImages[index]}
-                          alt={`${label} preview`}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-xs text-slate-500">
-                          No preview
-                        </div>
-                      )}
-                    </div>
-                    <div className="px-3 py-2 text-xs text-slate-400">{label}</div>
-                  </Card>
-                ))}
-              </div>
+              {activeStyleEntry && (
+                <Badge variant="outline" className="border-slate-700 text-[11px] text-slate-300">
+                  {activeStyleEntry.name}
+                </Badge>
+              )}
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            {/* Square preview images */}
+            <div className="grid grid-cols-3 gap-3 mx-auto w-full max-w-[600px]">
+              {["Character", "Object", "Set"].map((label, index) => (
+                <div key={label} className="flex flex-col">
+                  <div
+                    className="aspect-square w-full overflow-hidden rounded-lg border border-slate-800 bg-slate-900/60"
+                    onDoubleClick={() => {
+                      if (previewImages[index]) setLightboxSrc(previewImages[index]);
+                    }}
+                  >
+                    {previewImages[index] ? (
+                      <img
+                        src={previewImages[index]}
+                        alt={`${label} preview`}
+                        className="h-full w-full object-cover cursor-zoom-in"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-[11px] text-slate-500">
+                        No preview
+                      </div>
+                    )}
+                  </div>
+                  <p className="mt-1 text-center text-[11px] text-slate-400">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-auto flex flex-wrap gap-2 pt-3">
               <Button
                 type="button"
                 variant="secondary"
+                size="sm"
                 onClick={handleApplyDraft}
                 disabled={!activeDraft}
               >
@@ -650,14 +693,16 @@ export default function StylePage() {
               <Button
                 type="button"
                 variant="outline"
+                size="sm"
                 onClick={handleSaveAsNew}
                 disabled={!activeStyleEntry}
               >
-                Save as New Style
+                Save as New
               </Button>
               <Button
                 type="button"
                 variant="outline"
+                size="sm"
                 onClick={handleSetDefault}
                 disabled={!activeStyleEntry}
               >
@@ -669,36 +714,32 @@ export default function StylePage() {
 
         <ResizableHandle />
 
-        <ResizablePanel defaultSize={25} minSize={20} className="bg-slate-950/50">
+        {/* ─── Right panel: Styles list + Draft history ─── */}
+        <ResizablePanel defaultSize={25} minSize={18} className="bg-slate-950/50">
           <ResizablePanelGroup direction="vertical" className="h-full">
-            <ResizablePanel defaultSize={40} minSize={25} className="border-b border-slate-800">
+            <ResizablePanel defaultSize={35} minSize={20} className="border-b border-slate-800">
               <div className="flex h-full flex-col">
-                <div className="flex items-center justify-between px-4 py-3">
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-100">Styles</h3>
-                    <p className="text-xs text-slate-500">Manage named presets</p>
-                  </div>
-                  <Button size="sm" variant="secondary" className="gap-1" onClick={handleCreateStyle}>
-                    <PlusCircle className="h-4 w-4" />
+                <div className="flex items-center justify-between px-3 py-2">
+                  <h3 className="text-xs font-semibold text-slate-100">Styles</h3>
+                  <Button size="sm" variant="secondary" className="gap-1 h-7 text-[11px]" onClick={handleCreateStyle}>
+                    <PlusCircle className="h-3.5 w-3.5" />
                     New
                   </Button>
                 </div>
 
                 <ScrollArea className="flex-1">
-                  <div className="space-y-2 px-3 pb-4">
+                  <div className="space-y-1 px-2 pb-3">
                     {!styles.length && (
-                      <div className="rounded-md border border-dashed border-slate-800 px-3 py-4 text-xs text-slate-500">
+                      <div className="rounded-md border border-dashed border-slate-800 px-3 py-3 text-[11px] text-slate-500">
                         No styles yet. Create one to start.
                       </div>
                     )}
                     {styles.map((style) => {
                       const isActive = style.id === activeStyleEntry?.id;
-                      const hasReference = !!style.style?.reference;
-                      const hasDraft = !!style.style?.currentDraft;
                       return (
                         <div
                           key={style.id}
-                          className={`group flex items-center justify-between rounded-md border px-3 py-2 text-sm transition ${
+                          className={`group flex items-center justify-between rounded-md border px-2.5 py-1.5 text-xs transition ${
                             isActive
                               ? "border-emerald-500/60 bg-emerald-500/10"
                               : "border-slate-800 bg-slate-900/40 hover:border-slate-700"
@@ -706,7 +747,7 @@ export default function StylePage() {
                         >
                           <button
                             type="button"
-                            className="flex flex-1 items-center gap-2 text-left"
+                            className="flex flex-1 items-center gap-1.5 text-left"
                             onClick={() => selectStyle(style.id)}
                             onDoubleClick={(e) => {
                               e.preventDefault();
@@ -714,50 +755,34 @@ export default function StylePage() {
                               setEditingName(style.name);
                             }}
                           >
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2">
-                                {editingStyleId === style.id ? (
-                                  <Input
-                                    autoFocus
-                                    value={editingName}
-                                    onChange={(e) => setEditingName(e.target.value)}
-                                    onBlur={() => handleRenameStyle(style.id, editingName)}
-                                    onKeyDown={(e) => {
-                                      if (e.key === "Enter") handleRenameStyle(style.id, editingName);
-                                      if (e.key === "Escape") setEditingStyleId(null);
-                                    }}
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="h-6 px-1 py-0 text-sm font-medium"
-                                  />
-                                ) : (
-                                  <span className="font-medium text-slate-100">{style.name}</span>
-                                )}
-                                {defaultStyleId === style.id && (
-                                  <Star className="h-3.5 w-3.5 text-amber-400" />
-                                )}
-                              </div>
-                              <div className="mt-1 flex flex-wrap gap-1">
-                                {hasReference && (
-                                  <Badge variant="outline" className="border-slate-700 text-[10px] text-slate-300">
-                                    Reference
-                                  </Badge>
-                                )}
-                                {hasDraft && (
-                                  <Badge variant="outline" className="border-slate-700 text-[10px] text-slate-300">
-                                    Draft
-                                  </Badge>
-                                )}
-                              </div>
-                            </div>
+                            {editingStyleId === style.id ? (
+                              <Input
+                                autoFocus
+                                value={editingName}
+                                onChange={(e) => setEditingName(e.target.value)}
+                                onBlur={() => handleRenameStyle(style.id, editingName)}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter") handleRenameStyle(style.id, editingName);
+                                  if (e.key === "Escape") setEditingStyleId(null);
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="h-5 px-1 py-0 text-xs font-medium"
+                              />
+                            ) : (
+                              <span className="font-medium text-slate-100 truncate">{style.name}</span>
+                            )}
+                            {defaultStyleId === style.id && (
+                              <Star className="h-3 w-3 flex-shrink-0 text-amber-400" />
+                            )}
                           </button>
                           <Button
                             type="button"
                             size="icon"
                             variant="ghost"
-                            className="opacity-0 transition group-hover:opacity-100"
+                            className="h-6 w-6 opacity-0 transition group-hover:opacity-100"
                             onClick={() => handleDeleteStyle(style.id)}
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3.5 w-3.5" />
                           </Button>
                         </div>
                       );
@@ -769,69 +794,74 @@ export default function StylePage() {
 
             <ResizableHandle />
 
-            <ResizablePanel defaultSize={60} minSize={35}>
+            <ResizablePanel defaultSize={65} minSize={30}>
               <div className="flex h-full flex-col">
-                <div className="flex items-center justify-between px-4 py-3">
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-100">Draft history</h3>
-                    <p className="text-xs text-slate-500">Browse generated drafts</p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Button
-                      type="button"
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => navigateDraft("prev")}
-                      disabled={!drafts.length || currentDraftIndex === 0}
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      type="button"
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => navigateDraft("next")}
-                      disabled={!drafts.length || currentDraftIndex >= drafts.length - 1}
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
+                <div className="flex items-center justify-between px-3 py-2">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xs font-semibold text-slate-100">Draft history</h3>
+                    {drafts.length > 0 && (
+                      <Badge variant="outline" className="h-4 px-1.5 text-[10px] border-slate-700 text-slate-400">
+                        {drafts.length}
+                      </Badge>
+                    )}
                   </div>
                 </div>
 
                 <ScrollArea className="flex-1">
-                  <div className="grid grid-cols-2 gap-3 px-4 pb-4">
+                  <div className="space-y-1 px-2 pb-3">
                     {!drafts.length && (
-                      <div className="col-span-2 rounded-md border border-dashed border-slate-800 px-3 py-4 text-xs text-slate-500">
-                        No drafts yet. Generate a style to populate this panel.
+                      <div className="rounded-md border border-dashed border-slate-800 px-3 py-3 text-[11px] text-slate-500">
+                        No drafts yet. Generate to populate.
                       </div>
                     )}
-                    {drafts.map((draft, index) => (
-                      <button
-                        key={draft.id}
-                        type="button"
-                        className={`overflow-hidden rounded-md border transition ${
-                          index === currentDraftIndex
-                            ? "border-emerald-500/70"
-                            : "border-slate-800 hover:border-slate-700"
-                        }`}
-                        onClick={() => setCurrentDraftIndex(index)}
-                      >
-                        <div className="aspect-[4/3] w-full bg-slate-900/60">
-                          {draft.examples?.[0] ? (
-                            <img
-                              src={draft.examples[0]}
-                              alt={`Draft ${index + 1}`}
-                              className="h-full w-full object-cover"
-                            />
-                          ) : (
-                            <div className="flex h-full items-center justify-center text-xs text-slate-500">
-                              No preview
-                            </div>
+                    {drafts.map((draft, index) => {
+                      const draftNumber = drafts.length - index;
+                      const isSelected = index === currentDraftIndex;
+                      const isApplied = draft.id === appliedDraftId;
+
+                      return (
+                        <button
+                          key={draft.id}
+                          type="button"
+                          className={`flex w-full items-center gap-2.5 rounded-md border px-2.5 py-1.5 transition ${
+                            isSelected
+                              ? "border-emerald-500/70 bg-emerald-500/5"
+                              : "border-slate-800 bg-slate-900/40 hover:border-slate-700"
+                          }`}
+                          onClick={() => setCurrentDraftIndex(index)}
+                        >
+                          <span className="flex-shrink-0 text-[11px] font-medium text-slate-300 w-12 text-left">
+                            #{draftNumber}
+                          </span>
+                          <div className="flex gap-1">
+                            {(draft.examples ?? []).slice(0, 3).map((src, imgIdx) => (
+                              <div
+                                key={imgIdx}
+                                className="h-10 w-10 flex-shrink-0 overflow-hidden rounded border border-slate-700 bg-slate-900"
+                              >
+                                <img
+                                  src={src}
+                                  alt={`Draft ${draftNumber} img ${imgIdx + 1}`}
+                                  className="h-full w-full object-cover"
+                                />
+                              </div>
+                            ))}
+                            {/* Fill empty slots if fewer than 3 images */}
+                            {Array.from({ length: Math.max(0, 3 - (draft.examples?.length ?? 0)) }).map((_, i) => (
+                              <div
+                                key={`empty-${i}`}
+                                className="h-10 w-10 flex-shrink-0 rounded border border-slate-800 bg-slate-900/40"
+                              />
+                            ))}
+                          </div>
+                          {isApplied && (
+                            <Badge className="ml-auto h-4 px-1.5 text-[9px] bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+                              APPLIED
+                            </Badge>
                           )}
-                        </div>
-                        <div className="px-2 py-1 text-xs text-slate-400">Draft {index + 1}</div>
-                      </button>
-                    ))}
+                        </button>
+                      );
+                    })}
                   </div>
                 </ScrollArea>
               </div>

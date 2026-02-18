@@ -4,11 +4,11 @@
 
 ---
 
-## Phase 0: Critical Infrastructure Fixes
+## Phase 0: Critical Infrastructure Fixes ✅
 
-- [ ] **Fix Gemini `imageConfig` in API calls** — Currently aspect ratio is passed as prompt text. Must use `generationConfig.imageConfig.aspectRatio` and `imageConfig.imageSize` for resolution control.
-- [ ] **Standardize auth header** — Use `x-goog-api-key` header consistently (currently uses query param for images, header for video).
-- [ ] **Add `responseModalities` switching** — Use `["IMAGE"]` for single image, `["TEXT", "IMAGE"]` for batch generation.
+- [x] **Fix Gemini `imageConfig` in API calls** — Aspect ratio now passed via `generationConfig.imageConfig.aspectRatio` instead of prompt text.
+- [x] **Standardize auth header** — All API calls now use `x-goog-api-key` header consistently.
+- [x] **Add `responseModalities` switching** — Uses `["IMAGE"]` for single image, `["TEXT", "IMAGE"]` for batch generation.
 
 ## Phase 1: Prompt Engineering Upgrade (P0)
 

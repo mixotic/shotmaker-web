@@ -140,7 +140,8 @@ export async function POST(req: NextRequest) {
   if (model && !isValidImageModel(modelToUse)) {
     return NextResponse.json({ error: "Invalid image model selected" }, { status: 400 });
   }
-  const aspectRatio = styleEntry.style.aspectRatio ?? "1:1";
+  // Style examples are always square — the style's aspectRatio is for assets/shots
+  const aspectRatio = "1:1";
 
   try {
     const [characterImages, objectImages, environmentImages] = await Promise.all([
