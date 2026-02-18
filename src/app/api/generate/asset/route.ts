@@ -7,6 +7,9 @@ import { generationLog, mediaFiles, projects, userApiKeys, users } from "@/db/sc
 import { buildAssetGenerationPrompt, buildRefinementPrompt } from "@/lib/prompts/asset-generation";
 import { generateImages, isValidImageModel } from "@/lib/gemini";
 import { uploadMedia } from "@/lib/r2";
+
+const isR2Configured = () =>
+  !!(process.env.R2_ENDPOINT && process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY);
 import { checkCredits, deductCredits, CREDIT_COSTS } from "@/lib/credits";
 import type { Asset, AssetDraft, AssetParameters, ConversationMessage } from "@/types/asset";
 import type { NamedStyle } from "@/types/style";
@@ -248,31 +251,36 @@ export async function POST(req: NextRequest) {
 
     const uploaded = await Promise.all(
       images.map(async (buffer, index) => {
-        const upload = await uploadMedia({
-          userId,
-          projectId,
-          entityType: "asset",
-          entityId: entityIdForStorage,
-          draftIndex,
-          imageIndex: index,
-          body: buffer,
-          contentType: "image/png",
-          filename: `asset-${draftId}-${index}.png`,
-        });
+        if (isR2Configured()) {
+          const upload = await uploadMedia({
+            userId,
+            projectId,
+            entityType: "asset",
+            entityId: entityIdForStorage,
+            draftIndex,
+            imageIndex: index,
+            body: buffer,
+            contentType: "image/png",
+            filename: `asset-${draftId}-${index}.png`,
+          });
 
-        await db.insert(mediaFiles).values({
-          projectId,
-          userId,
-          entityType: "asset",
-          entityId: entityIdForStorage,
-          draftIndex,
-          imageIndex: index,
-          r2Key: upload.r2Key,
-          fileType: "image/png",
-          sizeBytes: buffer.length,
-        });
+          await db.insert(mediaFiles).values({
+            projectId,
+            userId,
+            entityType: "asset",
+            entityId: entityIdForStorage,
+            draftIndex,
+            imageIndex: index,
+            r2Key: upload.r2Key,
+            fileType: "image/png",
+            sizeBytes: buffer.length,
+          });
 
-        return { url: upload.publicUrl, size: buffer.length };
+          return { url: upload.publicUrl, size: buffer.length };
+        } else {
+          const dataUrl = `data:image/png;base64,${buffer.toString("base64")}`;
+          return { url: dataUrl, size: buffer.length };
+        }
       }),
     );
 

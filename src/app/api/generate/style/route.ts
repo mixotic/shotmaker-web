@@ -9,6 +9,9 @@ import { compileStyleValues } from "@/lib/prompts/compile-style";
 import { buildStyleGenerationPrompt } from "@/lib/prompts/style-generation";
 import { generateImages, isValidImageModel } from "@/lib/gemini";
 import { uploadMedia } from "@/lib/r2";
+
+const isR2Configured = () =>
+  !!(process.env.R2_ENDPOINT && process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY);
 import type { NamedStyle, StyleDraft, StyleParameters, VisualStyle } from "@/types/style";
 import { getActiveValue } from "@/types/style";
 
@@ -178,31 +181,38 @@ export async function POST(req: NextRequest) {
 
     const uploaded = await Promise.all(
       buffers.map(async (buffer, index) => {
-        const upload = await uploadMedia({
-          userId,
-          projectId,
-          entityType: "style",
-          entityId: styleEntry.id,
-          draftIndex,
-          imageIndex: index,
-          body: buffer,
-          contentType: "image/png",
-          filename: `style-${draftId}-${index}.png`,
-        });
+        if (isR2Configured()) {
+          // Upload to R2 storage
+          const upload = await uploadMedia({
+            userId,
+            projectId,
+            entityType: "style",
+            entityId: styleEntry.id,
+            draftIndex,
+            imageIndex: index,
+            body: buffer,
+            contentType: "image/png",
+            filename: `style-${draftId}-${index}.png`,
+          });
 
-        await db.insert(mediaFiles).values({
-          projectId,
-          userId,
-          entityType: "style",
-          entityId: styleEntry.id,
-          draftIndex,
-          imageIndex: index,
-          r2Key: upload.r2Key,
-          fileType: "image/png",
-          sizeBytes: buffer.length,
-        });
+          await db.insert(mediaFiles).values({
+            projectId,
+            userId,
+            entityType: "style",
+            entityId: styleEntry.id,
+            draftIndex,
+            imageIndex: index,
+            r2Key: upload.r2Key,
+            fileType: "image/png",
+            sizeBytes: buffer.length,
+          });
 
-        return { url: upload.publicUrl, size: buffer.length };
+          return { url: upload.publicUrl, size: buffer.length };
+        } else {
+          // No R2 configured — return as base64 data URL
+          const dataUrl = `data:image/png;base64,${buffer.toString("base64")}`;
+          return { url: dataUrl, size: buffer.length };
+        }
       }),
     );
 
