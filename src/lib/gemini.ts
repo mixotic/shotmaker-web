@@ -87,10 +87,10 @@ function getModelMethod(modelId: string): "generateContent" | "predict" {
 }
 
 async function generateViaGenerateContent(params: GenerateImagesParams): Promise<Buffer[]> {
-  const url = `${BASE_URL}/models/${params.model}:generateContent?key=${encodeURIComponent(params.apiKey)}`;
+  const url = `${BASE_URL}/models/${params.model}:generateContent`;
 
   const parts: any[] = [
-    { text: params.aspectRatio ? `${params.prompt}\n\nAspect ratio: ${params.aspectRatio}` : params.prompt },
+    { text: params.prompt },
   ];
 
   for (const img of params.referenceImages ?? []) {
@@ -102,16 +102,24 @@ async function generateViaGenerateContent(params: GenerateImagesParams): Promise
     });
   }
 
+  const useMultiModal = (params.numberOfImages ?? 1) > 1;
+
   const body = {
     contents: [{ role: "user", parts }],
     generationConfig: {
-      responseModalities: ["TEXT", "IMAGE"],
+      responseModalities: useMultiModal ? ["TEXT", "IMAGE"] : ["IMAGE"],
+      imageConfig: {
+        aspectRatio: params.aspectRatio || "1:1",
+      },
     },
   };
 
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": params.apiKey,
+    },
     body: JSON.stringify(body),
   });
 
@@ -149,7 +157,7 @@ async function generateViaGenerateContent(params: GenerateImagesParams): Promise
 }
 
 async function generateViaPredict(params: GenerateImagesParams): Promise<Buffer[]> {
-  const url = `${BASE_URL}/models/${params.model}:predict?key=${encodeURIComponent(params.apiKey)}`;
+  const url = `${BASE_URL}/models/${params.model}:predict`;
 
   const instance: any = { prompt: params.prompt };
 
@@ -173,7 +181,10 @@ async function generateViaPredict(params: GenerateImagesParams): Promise<Buffer[
 
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": params.apiKey,
+    },
     body: JSON.stringify(body),
   });
 
@@ -339,8 +350,10 @@ export function getAvailableVideoModels() {
 
 export async function testApiKey(apiKey: string): Promise<{ ok: boolean; error?: string }> {
   try {
-    const url = `${BASE_URL}/models?key=${encodeURIComponent(apiKey)}`;
-    const res = await fetch(url);
+    const url = `${BASE_URL}/models`;
+    const res = await fetch(url, {
+      headers: { "x-goog-api-key": apiKey },
+    });
     if (!res.ok) {
       const text = await res.text().catch(() => "");
       throw new Error(`Gemini list models failed (${res.status}): ${text}`);
