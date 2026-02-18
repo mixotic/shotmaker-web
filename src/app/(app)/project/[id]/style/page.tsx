@@ -60,153 +60,40 @@ const PARAM_FIELDS: { key: StyleParamKey; label: string }[] = [
 ];
 
 const QUICK_PRESET_NAMES = [
-  "Cinematic",
+  "70mm Epic",
   "Anime",
-  "Noir",
+  "Cyberpunk",
   "Documentary",
+  "Claymation",
+  "Film Noir",
+  "Horror",
   "Fantasy",
   "Sci-Fi",
-  "Horror",
   "Western",
-  "Vintage",
-  "Minimalist",
-  "Surreal",
-  "Gothic",
-  "Tropical",
-  "Industrial",
-  "Ethereal",
+  "Vector Animation",
+  "Stop Motion",
+  "Watercolor Dream",
+  "Pixel Art",
+  "Comic Book",
 ] as const;
 
-const buildPreset = (config: {
-  medium?: Medium;
-  filmFormat?: FilmFormat | null;
-  filmGrain?: FilmGrain | null;
-  depthOfField?: DepthOfField | null;
-  detailLevel?: number;
-  preset: Record<StyleParamKey, string>;
-  manual?: Record<StyleParamKey, string>;
-}): StylePreset => ({
-  medium: config.medium ?? Medium.photorealistic,
-  filmFormat: config.filmFormat ?? null,
-  filmGrain: config.filmGrain ?? null,
-  depthOfField: config.depthOfField ?? null,
-  detailLevel: config.detailLevel ?? 80,
-  preset: config.preset,
-  manual: config.manual ?? config.preset,
-});
-
+// Quick presets map directly to STYLE_PRESETS — these are the Mac app's 15 presets
 const QUICK_PRESETS: Record<(typeof QUICK_PRESET_NAMES)[number], StylePreset> = {
-  Cinematic: STYLE_PRESETS.Cinematic,
+  "70mm Epic": STYLE_PRESETS["70mm Epic"],
   Anime: STYLE_PRESETS.Anime,
-  Noir: STYLE_PRESETS["Film Noir"],
+  Cyberpunk: STYLE_PRESETS.Cyberpunk,
   Documentary: STYLE_PRESETS.Documentary,
+  Claymation: STYLE_PRESETS.Claymation,
+  "Film Noir": STYLE_PRESETS["Film Noir"],
+  Horror: STYLE_PRESETS.Horror,
   Fantasy: STYLE_PRESETS.Fantasy,
   "Sci-Fi": STYLE_PRESETS["Sci-Fi"],
-  Horror: STYLE_PRESETS.Horror,
   Western: STYLE_PRESETS.Western,
-  Vintage: buildPreset({
-    medium: Medium.film35mm,
-    filmFormat: FilmFormat.standard,
-    filmGrain: FilmGrain.vintage,
-    depthOfField: DepthOfField.moderate,
-    detailLevel: 70,
-    preset: {
-      lighting: "Golden hour (sunrise/sunset)",
-      colorPalette: "Sepia vintage",
-      aesthetic: "Retro 80s",
-      atmosphere: "Nostalgic retro",
-      mood: "Melancholic",
-      motion: "Smooth steady movement",
-      texture: "Fine detail cinematic grain",
-    },
-  }),
-  Minimalist: buildPreset({
-    filmGrain: FilmGrain.none,
-    depthOfField: DepthOfField.deep,
-    detailLevel: 60,
-    preset: {
-      lighting: "Soft and diffused",
-      colorPalette: "Limited palette colors",
-      aesthetic: "Minimalist modern",
-      atmosphere: "Clear and bright",
-      mood: "Neutral",
-      motion: "Locked-off camera",
-      texture: "Clean cel-shaded",
-    },
-  }),
-  Surreal: buildPreset({
-    filmGrain: FilmGrain.subtle,
-    depthOfField: DepthOfField.shallow,
-    detailLevel: 80,
-    preset: {
-      lighting: "Volumetric god rays",
-      colorPalette: "Vibrant saturated colors",
-      aesthetic: "Surreal dreamlike",
-      atmosphere: "Ethereal and dreamlike",
-      mood: "Whimsical",
-      motion: "Floating dream drift",
-      texture: "Painterly brush strokes",
-    },
-  }),
-  Gothic: buildPreset({
-    medium: Medium.film35mm,
-    filmFormat: FilmFormat.standard,
-    filmGrain: FilmGrain.moderate,
-    depthOfField: DepthOfField.shallow,
-    detailLevel: 85,
-    preset: {
-      lighting: "Low-key dark lighting",
-      colorPalette: "Desaturated / washed out",
-      aesthetic: "Film noir",
-      atmosphere: "Mysterious",
-      mood: "Ominous",
-      motion: "Slow motion",
-      texture: "Grainy / organic",
-    },
-  }),
-  Tropical: buildPreset({
-    depthOfField: DepthOfField.deep,
-    detailLevel: 80,
-    preset: {
-      lighting: "Natural daylight",
-      colorPalette: "Vibrant saturated colors",
-      aesthetic: "Nature documentary",
-      atmosphere: "Warm cozy",
-      mood: "Serene",
-      motion: "Smooth steady movement",
-      texture: "Sharp and crisp",
-    },
-  }),
-  Industrial: buildPreset({
-    filmFormat: FilmFormat.standard,
-    filmGrain: FilmGrain.subtle,
-    depthOfField: DepthOfField.moderate,
-    detailLevel: 85,
-    preset: {
-      lighting: "Dramatic shadows",
-      colorPalette: "Desaturated / washed out",
-      aesthetic: "Brutalist",
-      atmosphere: "Gritty and raw",
-      mood: "Tense",
-      motion: "Handheld natural camera",
-      texture: "Rough gritty",
-    },
-  }),
-  Ethereal: buildPreset({
-    medium: Medium.watercolor,
-    filmGrain: FilmGrain.subtle,
-    depthOfField: DepthOfField.shallow,
-    detailLevel: 70,
-    preset: {
-      lighting: "Soft and diffused",
-      colorPalette: "Muted pastels",
-      aesthetic: "Watercolor painting",
-      atmosphere: "Ethereal and dreamlike",
-      mood: "Serene",
-      motion: "Fluid organic motion",
-      texture: "Watercolor paper",
-    },
-  }),
+  "Vector Animation": STYLE_PRESETS["Vector Animation"],
+  "Stop Motion": STYLE_PRESETS["Stop Motion"],
+  "Watercolor Dream": STYLE_PRESETS["Watercolor Dream"],
+  "Pixel Art": STYLE_PRESETS["Pixel Art"],
+  "Comic Book": STYLE_PRESETS["Comic Book"],
 };
 
 const STYLE_PARAM_KEYS: StyleParamKey[] = PARAM_FIELDS.map((item) => item.key);
@@ -247,6 +134,8 @@ export default function StylePage() {
   } = useStyleStore();
 
   const [error, setError] = useState<string | null>(null);
+  const [editingStyleId, setEditingStyleId] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState("");
 
   const styles = (currentProject?.projectData?.styles ?? []) as NamedStyle[];
   const defaultStyleId = currentProject?.projectData?.defaultStyleId ?? null;
@@ -281,6 +170,15 @@ export default function StylePage() {
     selectStyle(newStyle.id);
   };
 
+  const handleRenameStyle = (styleId: string, newName: string) => {
+    if (!currentProject || !newName.trim()) return;
+    const updatedStyles = styles.map((s) =>
+      s.id === styleId ? { ...s, name: newName.trim() } : s,
+    );
+    updateProjectData({ styles: updatedStyles });
+    setEditingStyleId(null);
+  };
+
   const handleDeleteStyle = (styleId: string) => {
     if (!currentProject) return;
     const nextStyles = styles.filter((style) => style.id !== styleId);
@@ -294,6 +192,8 @@ export default function StylePage() {
   const handleApplyPreset = (preset: StylePreset) => {
     if (!activeStyleEntry || !currentProject) return;
 
+    // Preserve current mode — Quick Styles work in both Preset and Manual modes
+    // (matches Mac app behavior: DO NOT change mode when applying a preset)
     const updatedStyle: NamedStyle = {
       ...activeStyleEntry,
       style: {
@@ -305,11 +205,6 @@ export default function StylePage() {
         detailLevel: preset.detailLevel,
         presetValues: { ...preset.preset },
         manualValues: { ...preset.manual },
-        useManual: STYLE_PARAM_KEYS.reduce((acc, key) => {
-          acc[key] = false;
-          return acc;
-        }, {} as Record<StyleParamKey, boolean>),
-        isAdvancedMode: false,
       },
       lastUsedAt: new Date().toISOString(),
     };
@@ -513,65 +408,65 @@ export default function StylePage() {
                 />
               </div>
 
-              {!isManualMode && (
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label>Quick presets</Label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {QUICK_PRESET_NAMES.map((name) => (
-                        <Button
-                          key={name}
-                          type="button"
-                          variant="secondary"
-                          className="justify-start"
-                          onClick={() => handleApplyPreset(QUICK_PRESETS[name])}
-                          disabled={!activeStyle}
-                        >
-                          {name}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
+              {/* Quick Styles — always visible in both modes */}
+              <div className="space-y-2">
+                <Label>Quick presets</Label>
+                <div className="grid grid-cols-2 gap-2">
+                  {QUICK_PRESET_NAMES.map((name) => (
+                    <Button
+                      key={name}
+                      type="button"
+                      variant="secondary"
+                      className="justify-start"
+                      onClick={() => handleApplyPreset(QUICK_PRESETS[name])}
+                      disabled={!activeStyle}
+                    >
+                      {name}
+                    </Button>
+                  ))}
+                </div>
+              </div>
 
-                  {activeStyle && (
-                  <div className="space-y-4">
-                    {PARAM_FIELDS.map((field) => (
-                      <div className="space-y-2" key={field.key}>
-                        <Label>{field.label}</Label>
-                        <Select
-                          value={activeStyle.presetValues[field.key] || undefined}
-                          onValueChange={(value) => setParameter(field.key, value, "preset")}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {StyleParameterOptions[field.key]
-                              .filter((option) => option !== "")
-                              .map((option) => (
-                                <SelectItem key={`${field.key}-${option}`} value={option}>
-                                  {option}
-                                </SelectItem>
-                              ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    ))}
-                  </div>
-                  )}
+              {/* Preset mode: dropdown selectors */}
+              {!isManualMode && activeStyle && (
+                <div className="space-y-4">
+                  {PARAM_FIELDS.map((field) => (
+                    <div className="space-y-2" key={field.key}>
+                      <Label>{field.label}</Label>
+                      <Select
+                        value={activeStyle.presetValues[field.key] || undefined}
+                        onValueChange={(value) => setParameter(field.key, value, "preset")}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {StyleParameterOptions[field.key]
+                            .filter((option) => option !== "")
+                            .map((option) => (
+                              <SelectItem key={`${field.key}-${option}`} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  ))}
                 </div>
               )}
 
+              {/* Manual mode: free-form text inputs */}
               {isManualMode && (
                 <div className="space-y-4">
                   {PARAM_FIELDS.map((field) => (
                     <div className="space-y-2" key={field.key}>
                       <Label>{field.label}</Label>
-                      <Input
+                      <Textarea
                         value={activeStyle?.manualValues[field.key] ?? ""}
                         onChange={(e) => setParameter(field.key, e.target.value, "manual")}
                         placeholder={`Describe ${field.label.toLowerCase()}`}
                         disabled={!activeStyle}
+                        className="min-h-[80px]"
                       />
                     </div>
                   ))}
@@ -720,10 +615,30 @@ export default function StylePage() {
                             type="button"
                             className="flex flex-1 items-center gap-2 text-left"
                             onClick={() => selectStyle(style.id)}
+                            onDoubleClick={(e) => {
+                              e.preventDefault();
+                              setEditingStyleId(style.id);
+                              setEditingName(style.name);
+                            }}
                           >
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
-                                <span className="font-medium text-slate-100">{style.name}</span>
+                                {editingStyleId === style.id ? (
+                                  <Input
+                                    autoFocus
+                                    value={editingName}
+                                    onChange={(e) => setEditingName(e.target.value)}
+                                    onBlur={() => handleRenameStyle(style.id, editingName)}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter") handleRenameStyle(style.id, editingName);
+                                      if (e.key === "Escape") setEditingStyleId(null);
+                                    }}
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="h-6 px-1 py-0 text-sm font-medium"
+                                  />
+                                ) : (
+                                  <span className="font-medium text-slate-100">{style.name}</span>
+                                )}
                                 {defaultStyleId === style.id && (
                                   <Star className="h-3.5 w-3.5 text-amber-400" />
                                 )}
