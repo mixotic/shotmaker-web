@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,6 +25,7 @@ import {
 import {
   ChevronLeft,
   ChevronRight,
+  ImagePlus,
   Loader2,
   PlusCircle,
   Sparkles,
@@ -136,6 +137,8 @@ export default function StylePage() {
   const [error, setError] = useState<string | null>(null);
   const [editingStyleId, setEditingStyleId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
+  const [isExtracting, setIsExtracting] = useState(false);
+  const extractInputRef = useRef<HTMLInputElement>(null);
 
   const styles = (currentProject?.projectData?.styles ?? []) as NamedStyle[];
   const defaultStyleId = currentProject?.projectData?.defaultStyleId ?? null;
@@ -177,6 +180,58 @@ export default function StylePage() {
     );
     updateProjectData({ styles: updatedStyles });
     setEditingStyleId(null);
+  };
+
+  const handleExtractStyle = async (file: File) => {
+    if (!activeStyleEntry || !currentProject) return;
+    setIsExtracting(true);
+    setError(null);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch("/api/generate/extract-style", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({ error: "Extraction failed" }));
+        throw new Error(data.error ?? `HTTP ${res.status}`);
+      }
+
+      const { style: extracted } = await res.json();
+
+      // Apply extracted values to current style
+      const updatedStyle: NamedStyle = {
+        ...activeStyleEntry,
+        style: {
+          ...activeStyleEntry.style,
+          medium: extracted.medium ?? activeStyleEntry.style.medium,
+          filmFormat: extracted.filmFormat ?? activeStyleEntry.style.filmFormat,
+          filmGrain: extracted.filmGrain ?? activeStyleEntry.style.filmGrain,
+          depthOfField: extracted.depthOfField ?? activeStyleEntry.style.depthOfField,
+          detailLevel: extracted.detailLevel ?? activeStyleEntry.style.detailLevel,
+          manualValues: { ...extracted.manualValues },
+          customPrompt: extracted.customPrompt ?? "",
+          // Switch to manual mode to show extracted text (matches Mac app)
+          isAdvancedMode: true,
+        },
+        lastUsedAt: new Date().toISOString(),
+      };
+
+      const updatedStyles = styles.map((s) =>
+        s.id === activeStyleEntry.id ? updatedStyle : s,
+      );
+      updateProjectData({ styles: updatedStyles });
+
+      // Also switch the UI to manual mode
+      toggleMode("manual");
+    } catch (e: any) {
+      setError(e?.message ?? "Style extraction failed");
+    } finally {
+      setIsExtracting(false);
+    }
   };
 
   const handleDeleteStyle = (styleId: string) => {
@@ -425,6 +480,44 @@ export default function StylePage() {
                     </Button>
                   ))}
                 </div>
+              </div>
+
+              {/* Extract Style from Image */}
+              <div className="space-y-2">
+                <Label>Extract style from image</Label>
+                <input
+                  ref={extractInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/heic"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleExtractStyle(file);
+                    e.target.value = "";
+                  }}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full gap-2"
+                  onClick={() => extractInputRef.current?.click()}
+                  disabled={!activeStyle || isExtracting}
+                >
+                  {isExtracting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      <ImagePlus className="h-4 w-4" />
+                      Upload Image to Extract Style
+                    </>
+                  )}
+                </Button>
+                <p className="text-xs text-slate-400">
+                  AI will analyze the image and auto-populate all style parameters
+                </p>
               </div>
 
               {/* Preset mode: dropdown selectors */}
