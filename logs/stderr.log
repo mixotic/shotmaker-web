@@ -1,0 +1,1590 @@
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/api/projects/[id]/[__metadata_id__]/route/app-paths-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/api/projects/[id]/[__metadata_id__]/route/app-paths-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/api/auth/[...nextauth]/[__metadata_id__]/route/app-paths-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/api/auth/[...nextauth]/[__metadata_id__]/route/app-paths-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/api/auth/[...nextauth]/[__metadata_id__]/route/app-paths-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/api/auth/[...nextauth]/[__metadata_id__]/route/app-paths-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/(app)/project/[id]/style/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.odqk8k1bo3'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.odqk8k1bo3'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.2rdpoq71s5s'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.2rdpoq71s5s'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.t0xfm71b53'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.t0xfm71b53'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.f6bdw3ayi66'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.f6bdw3ayi66'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.ln8zthcr3qp'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.ln8zthcr3qp'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.w1lllqzs1ih'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.w1lllqzs1ih'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.4bggqqjacgr'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.4bggqqjacgr'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.aan50in5i3'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.aan50in5i3'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.1y2f6onhl2w'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.1y2f6onhl2w'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.17k97vhzbtu'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.17k97vhzbtu'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.etbwpnsea6'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.etbwpnsea6'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.udcdgmze3p9'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.udcdgmze3p9'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.9jd9jnmopqw'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.9jd9jnmopqw'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.8tlt4vnl9u6'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.8tlt4vnl9u6'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.4dwn3uew403'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.4dwn3uew403'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.eio8mo0a5qj'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.eio8mo0a5qj'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.tau1vqqyh8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.tau1vqqyh8'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.7ydrxlawhal'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.7ydrxlawhal'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.wusc0sg8ai9'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.wusc0sg8ai9'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.vlsc8kbzpxh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.vlsc8kbzpxh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.2bikhhiokax'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.2bikhhiokax'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.v0idlgeuxna'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.v0idlgeuxna'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.j8g7f4giofo'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.j8g7f4giofo'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.8p7tnyg3tfn'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.8p7tnyg3tfn'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.g5kc1jlh914'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.g5kc1jlh914'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.ajfa0ok8ctk'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.ajfa0ok8ctk'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.kebj7bj685s'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.kebj7bj685s'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.hljpges8yzl'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.hljpges8yzl'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.y7rus5mc7t'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.y7rus5mc7t'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.exx51z19h3t'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.exx51z19h3t'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.dejlu2nxbof'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.dejlu2nxbof'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.zwg1blnobs'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.zwg1blnobs'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.qxrq11mdzh9'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.qxrq11mdzh9'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.gfd4mbd5p18'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.gfd4mbd5p18'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.yq2s53lp6x'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.yq2s53lp6x'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.65kmjm4snud'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.65kmjm4snud'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.g7mo2qhi9gk'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.g7mo2qhi9gk'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.1vos5dbvq72'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.1vos5dbvq72'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.us8h25fcsn'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.us8h25fcsn'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.3g2k3gu8wik'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.3g2k3gu8wik'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.pwpitcki8x'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.pwpitcki8x'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.yg4lb3atj8q'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.yg4lb3atj8q'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.68fvq0ro3l8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.68fvq0ro3l8'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.nhzgzpga9gd'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.nhzgzpga9gd'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.3h3xxbk6qgp'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.3h3xxbk6qgp'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.8fzglhfptmm'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.8fzglhfptmm'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.n7w10wj9rah'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.n7w10wj9rah'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.acz08koatfr'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.acz08koatfr'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.apbh2js9rt8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.apbh2js9rt8'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.nps1h1otkb'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.nps1h1otkb'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.9cpxbv1qwiq'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.9cpxbv1qwiq'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.pzi2r2vmzni'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.pzi2r2vmzni'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.doat4bstnh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.doat4bstnh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.kl83f3zqgec'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.kl83f3zqgec'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.y4fuzvxj2v'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.y4fuzvxj2v'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.63t5qmgwmpm'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.63t5qmgwmpm'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.0c04ku6typ4g'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.0c04ku6typ4g'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.pmdrr57gsk'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.pmdrr57gsk'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.vz13aj5u2v'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.vz13aj5u2v'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.rikcoqt7zy'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.rikcoqt7zy'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.7s4yso7b7c'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.7s4yso7b7c'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.rujtii6rvze'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.rujtii6rvze'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.4zn1ayjxwq5'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.4zn1ayjxwq5'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.cnk7e1p9wz'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.cnk7e1p9wz'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.fhscg8rjvmi'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.fhscg8rjvmi'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.j7l6z10ogo'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/static/development/_buildManifest.js.tmp.j7l6z10ogo'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/aaron/Projects/shotmaker-web/.next/server/app/page/app-build-manifest.json'
+}

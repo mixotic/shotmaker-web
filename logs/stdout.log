@@ -85,3 +85,57 @@
  ✓ Compiled in 458ms
  GET /project/01a04726-64a5-4338-b0bb-901a58ce1421/style 200 in 423ms
  GET /project/01a04726-64a5-4338-b0bb-901a58ce1421/style 200 in 23ms
+   ▲ Next.js 15.1.3 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.4.179:3001
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Compiled in 755ms
+ ✓ Ready in 1801ms
+ ○ Compiling /project/[id]/style ...
+ ✓ Compiled /project/[id]/style in 4.2s
+ GET /project/01a04726-64a5-4338-b0bb-901a58ce1421/style 200 in 4719ms
+ ○ Compiling /api/projects/[id] ...
+ ✓ Compiled /api/projects/[id] in 620ms
+ GET /api/auth/session 200 in 1052ms
+ GET /api/auth/session 200 in 22ms
+ GET /api/projects/01a04726-64a5-4338-b0bb-901a58ce1421 200 in 37292ms
+ ✓ Compiled in 26ms
+ ✓ Compiled in 41ms
+ ✓ Compiled in 26ms
+ ✓ Compiled in 127ms
+ ✓ Compiled in 76ms
+ ✓ Compiled in 72ms
+ ✓ Compiled in 66ms
+ ✓ Compiled in 80ms
+ ✓ Compiled in 70ms
+ ✓ Compiled in 131ms
+ ✓ Compiled in 72ms
+ ✓ Compiled in 72ms
+ ✓ Compiled in 48ms
+ ✓ Compiled in 68ms
+ ✓ Compiled in 53ms
+ ✓ Compiled in 71ms
+ ✓ Compiled in 66ms
+ ✓ Compiled in 66ms
+ ✓ Compiled in 66ms
+ ✓ Compiled in 68ms
+ ✓ Compiled in 68ms
+ ✓ Compiled in 49ms
+ ✓ Compiled in 91ms
+ ✓ Compiled in 73ms
+ ✓ Compiled in 79ms
+ ✓ Compiled in 63ms
+ ✓ Compiled in 81ms
+ ✓ Compiled in 78ms
+ ○ Compiling /_not-found/page ...
+ ✓ Compiled /_not-found/page in 1053ms
+ ✓ Compiled /dashboard in 184ms
+ ✓ Compiled / in 487ms
+ ✓ Compiled in 65ms
+ ✓ Compiled in 34ms
+ ✓ Compiled in 44ms
+ ✓ Compiled in 49ms
+ ✓ Compiled in 0ms
+ ✓ Compiled in 30ms

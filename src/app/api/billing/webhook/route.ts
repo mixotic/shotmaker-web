@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq, sql } from "drizzle-orm";
 import Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
 import { db } from "@/db";
 import { creditTransactions, users } from "@/db/schema";
 import { addCredits } from "@/lib/credits";
@@ -11,6 +10,16 @@ function requiredEnv(name: string): string {
   const v = process.env[name];
   if (!v) throw new Error(`Missing env var: ${name}`);
   return v;
+}
+
+let _stripe: Stripe | null = null;
+function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error("STRIPE_SECRET_KEY is not configured");
+    _stripe = new Stripe(key, { apiVersion: "2025-02-24.acacia" });
+  }
+  return _stripe;
 }
 
 async function resolveUserIdFromCustomer(customerId: string | null): Promise<string | null> {
@@ -78,7 +87,7 @@ async function resolvePriceIdFromSession(
     return session.line_items.data[0]?.price?.id ?? null;
   }
 
-  const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+  const lineItems = await getStripe().checkout.sessions.listLineItems(session.id, {
     limit: 1,
   });
   return lineItems.data[0]?.price?.id ?? null;
@@ -93,7 +102,7 @@ export async function POST(req: NextRequest) {
   const body = await req.text();
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(
+    event = getStripe().webhooks.constructEvent(
       body,
       sig,
       requiredEnv("STRIPE_WEBHOOK_SECRET"),
@@ -115,7 +124,7 @@ export async function POST(req: NextRequest) {
       if (!userId) break;
 
       if (session.mode === "subscription" && session.subscription) {
-        const subscription = await stripe.subscriptions.retrieve(
+        const subscription = await getStripe().subscriptions.retrieve(
           session.subscription as string,
         );
         const priceId =
