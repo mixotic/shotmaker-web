@@ -49,6 +49,7 @@ interface StyleStoreState {
   navigateDraft: (direction: "prev" | "next") => void;
   setCurrentDraftIndex: (index: number) => void;
   applyDraft: (projectId: string) => void;
+  deleteDraft: (draftId: string) => void;
 }
 
 export const useStyleStore = create<StyleStoreState>((set, get) => ({
@@ -170,6 +171,9 @@ export const useStyleStore = create<StyleStoreState>((set, get) => ({
     set({ isGenerating: true, generationProgress: "Generating" });
 
     try {
+      // Flush any pending debounced save so the API reads current field values
+      await useProjectStore.getState().flushSave();
+
       const res = await fetch("/api/generate/style", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -268,6 +272,47 @@ export const useStyleStore = create<StyleStoreState>((set, get) => ({
     set({
       currentDraftIndex: nextIndex,
       previewImages: drafts[nextIndex]?.examples ?? [],
+    });
+  },
+
+  deleteDraft: (draftId) => {
+    const { currentProject, updateProjectData } = useProjectStore.getState();
+    if (!currentProject) return;
+
+    const styles = (currentProject.projectData?.styles ?? []) as NamedStyle[];
+    const styleId = get().currentStyleId ?? styles[0]?.id;
+    if (!styleId) return;
+
+    const styleIndex = styles.findIndex((style) => style.id === styleId);
+    if (styleIndex < 0) return;
+
+    const styleEntry = styles[styleIndex];
+    const allDrafts = getDrafts(styleEntry.style);
+    const remainingDrafts = allDrafts.filter((d) => d.id !== draftId);
+
+    // If deleting the currentDraft, clear it
+    const nextCurrentDraft =
+      styleEntry.style.currentDraft?.id === draftId ? (remainingDrafts[0] ?? null) : styleEntry.style.currentDraft;
+    const nextHistory = (styleEntry.style.draftHistory ?? []).filter((d) => d.id !== draftId);
+
+    const updatedStyle: NamedStyle = {
+      ...styleEntry,
+      style: {
+        ...styleEntry.style,
+        currentDraft: nextCurrentDraft,
+        draftHistory: nextHistory,
+      },
+    };
+
+    const updatedStyles = styles.map((style, i) => (i === styleIndex ? updatedStyle : style));
+    updateProjectData({ styles: updatedStyles });
+
+    // Adjust selected index
+    const currentIdx = get().currentDraftIndex;
+    const newIdx = Math.min(currentIdx, Math.max(0, remainingDrafts.length - 1));
+    set({
+      currentDraftIndex: newIdx,
+      previewImages: remainingDrafts[newIdx]?.examples ?? [],
     });
   },
 

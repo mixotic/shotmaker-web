@@ -23,7 +23,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  ChevronDown,
+  ChevronUp,
   ImagePlus,
+  Info,
   Loader2,
   PlusCircle,
   Sparkles,
@@ -31,8 +34,15 @@ import {
   Trash2,
   X,
 } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { PARAMETER_INFO } from "@/lib/parameterInfo";
 import { useProjectStore } from "@/stores/project-store";
 import { useStyleStore } from "@/stores/style-store";
+import type { StyleReference } from "@/types/style";
 import type { NamedStyle, StyleDraft, VisualStyle } from "@/types/style";
 import { createNamedStyle } from "@/types/style";
 import {
@@ -151,6 +161,38 @@ function ImageLightbox({
   );
 }
 
+/* ─── Parameter info popover ─── */
+function ParameterInfoButton({ paramKey }: { paramKey: string }) {
+  const info = PARAMETER_INFO[paramKey];
+  if (!info) return null;
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <button type="button" className="text-slate-500 hover:text-blue-400 transition-colors ml-1">
+          <Info className="h-3 w-3" />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-72 p-3 bg-slate-900 border-slate-700 text-slate-100" side="right">
+        <p className="font-semibold text-sm mb-1">{info.title}</p>
+        <p className="text-[11px] text-slate-400 mb-2 leading-relaxed">{info.description}</p>
+        {info.examples.length > 0 && (
+          <>
+            <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-1">Examples</p>
+            <ul className="space-y-0.5">
+              {info.examples.map((ex, i) => (
+                <li key={i} className="text-[11px] text-slate-400 flex gap-1">
+                  <span className="text-slate-600 flex-shrink-0">•</span>
+                  {ex}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 export default function StylePage() {
   const params = useParams();
   const projectId = params.id as string;
@@ -169,6 +211,7 @@ export default function StylePage() {
     generateStyleExamples,
     setCurrentDraftIndex,
     applyDraft,
+    deleteDraft,
   } = useStyleStore();
 
   const [error, setError] = useState<string | null>(null);
@@ -176,6 +219,8 @@ export default function StylePage() {
   const [editingName, setEditingName] = useState("");
   const [isExtracting, setIsExtracting] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [promptExpanded, setPromptExpanded] = useState(false);
+  const [saveAsNewName, setSaveAsNewName] = useState<string | null>(null);
   const extractInputRef = useRef<HTMLInputElement>(null);
 
   const styles = (currentProject?.projectData?.styles ?? []) as NamedStyle[];
@@ -320,16 +365,32 @@ export default function StylePage() {
 
   const handleSaveAsNew = () => {
     if (!activeStyleEntry || !currentProject) return;
+    const draft = activeDraft ?? activeStyleEntry.style.currentDraft;
+    const defaultName = `${activeStyleEntry.name} Copy`;
+    const name = window.prompt("Name for new style:", defaultName);
+    if (!name?.trim()) return;
     const now = new Date().toISOString();
+    const reference: StyleReference | undefined = draft
+      ? {
+          id: draft.id ?? newId(),
+          examples: draft.examples ?? [],
+          parameters: draft.parameters,
+          prompt: draft.prompt,
+          savedAt: now,
+          modifiedAt: now,
+        }
+      : activeStyleEntry.style.reference ?? undefined;
     const newStyle: NamedStyle = {
       ...activeStyleEntry,
       id: newId(),
-      name: `${activeStyleEntry.name} Copy`,
+      name: name.trim(),
       createdAt: now,
       lastUsedAt: now,
       style: {
         ...activeStyleEntry.style,
-        currentDraft: activeDraft ?? activeStyleEntry.style.currentDraft ?? null,
+        reference: reference ?? activeStyleEntry.style.reference,
+        currentDraft: draft ?? activeStyleEntry.style.currentDraft ?? null,
+        draftHistory: draft ? [draft] : activeStyleEntry.style.draftHistory,
       },
     };
     updateProjectData({ styles: [...styles, newStyle] });
@@ -352,18 +413,18 @@ export default function StylePage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-7rem)] flex-col gap-2">
+    <div className="flex h-full flex-col gap-2 p-2">
       {lightboxSrc && (
         <ImageLightbox src={lightboxSrc} alt="Style preview" onClose={closeLightbox} />
       )}
 
       {error && (
-        <div className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+        <div className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400 flex-none">
           {error}
         </div>
       )}
 
-      <ResizablePanelGroup direction="horizontal" className="flex-1 rounded-lg border border-slate-800">
+      <ResizablePanelGroup direction="horizontal" className="flex-1 min-h-0 rounded-lg border border-slate-800">
         {/* ─── Left panel: Controls ─── */}
         <ResizablePanel defaultSize={28} minSize={22} className="bg-slate-950/50">
           <ScrollArea className="h-full">
@@ -388,7 +449,7 @@ export default function StylePage() {
                 <Label className="text-xs">Camera styles</Label>
 
                 <div className="space-y-1.5">
-                  <Label className="text-[11px] text-slate-400">Aspect ratio</Label>
+                  <Label className="text-[11px] text-slate-400 flex items-center">Aspect ratio<ParameterInfoButton paramKey="aspectRatio" /></Label>
                   <Select
                     value={activeStyle?.aspectRatio ?? ImageAspectRatio.landscape169}
                     onValueChange={(value) => setParameter("aspectRatio", value)}
@@ -408,7 +469,7 @@ export default function StylePage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-[11px] text-slate-400">Medium</Label>
+                  <Label className="text-[11px] text-slate-400 flex items-center">Medium<ParameterInfoButton paramKey="medium" /></Label>
                   <Select
                     value={activeStyle?.medium ?? Medium.photorealistic}
                     onValueChange={(value) => setParameter("medium", value)}
@@ -428,7 +489,7 @@ export default function StylePage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-[11px] text-slate-400">Film format</Label>
+                  <Label className="text-[11px] text-slate-400 flex items-center">Film format<ParameterInfoButton paramKey="filmFormat" /></Label>
                   <Select
                     value={activeStyle?.filmFormat ?? "none"}
                     onValueChange={(value) => setParameter("filmFormat", value === "none" ? null : value)}
@@ -449,7 +510,7 @@ export default function StylePage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-[11px] text-slate-400">Film grain</Label>
+                  <Label className="text-[11px] text-slate-400 flex items-center">Film grain<ParameterInfoButton paramKey="filmGrain" /></Label>
                   <Select
                     value={activeStyle?.filmGrain ?? "none"}
                     onValueChange={(value) => setParameter("filmGrain", value === "none" ? null : value)}
@@ -470,7 +531,7 @@ export default function StylePage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-[11px] text-slate-400">Depth of field</Label>
+                  <Label className="text-[11px] text-slate-400 flex items-center">Depth of field<ParameterInfoButton paramKey="depthOfField" /></Label>
                   <Select
                     value={activeStyle?.depthOfField ?? "none"}
                     onValueChange={(value) => setParameter("depthOfField", value === "none" ? null : value)}
@@ -562,7 +623,7 @@ export default function StylePage() {
                 <div className="space-y-3">
                   {PARAM_FIELDS.map((field) => (
                     <div className="space-y-1.5" key={field.key}>
-                      <Label className="text-xs">{field.label}</Label>
+                      <Label className="text-xs flex items-center">{field.label}<ParameterInfoButton paramKey={field.key} /></Label>
                       <Select
                         value={activeStyle.presetValues[field.key] || undefined}
                         onValueChange={(value) => setParameter(field.key, value, "preset")}
@@ -590,7 +651,7 @@ export default function StylePage() {
                 <div className="space-y-3">
                   {PARAM_FIELDS.map((field) => (
                     <div className="space-y-1.5" key={field.key}>
-                      <Label className="text-xs">{field.label}</Label>
+                      <Label className="text-xs flex items-center">{field.label}<ParameterInfoButton paramKey={field.key} /></Label>
                       <Textarea
                         value={activeStyle?.manualValues[field.key] ?? ""}
                         onChange={(e) => setParameter(field.key, e.target.value, "manual")}
@@ -604,7 +665,7 @@ export default function StylePage() {
               )}
 
               <div className="space-y-1.5">
-                <Label className="text-xs">Custom prompt</Label>
+                <Label className="text-xs flex items-center">Custom prompt<ParameterInfoButton paramKey="customPrompt" /></Label>
                 <Textarea
                   value={activeStyle?.customPrompt ?? ""}
                   onChange={(e) => setParameter("customPrompt", e.target.value)}
@@ -680,34 +741,38 @@ export default function StylePage() {
               ))}
             </div>
 
-            <div className="mt-auto flex flex-wrap gap-2 pt-3">
-              <Button
-                type="button"
-                variant="secondary"
-                size="sm"
-                onClick={handleApplyDraft}
-                disabled={!activeDraft}
-              >
-                Apply Style
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={handleSaveAsNew}
-                disabled={!activeStyleEntry}
-              >
-                Save as New
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={handleSetDefault}
-                disabled={!activeStyleEntry}
-              >
-                Set as Default
-              </Button>
+            <div className="mt-auto pt-3">
+              <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-2 flex flex-col gap-1.5">
+                <Button
+                  type="button"
+                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-white"
+                  size="sm"
+                  onClick={handleApplyDraft}
+                  disabled={!activeDraft}
+                >
+                  Apply Style
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full border-slate-700 hover:border-slate-500"
+                  size="sm"
+                  onClick={handleSaveAsNew}
+                  disabled={!activeStyleEntry}
+                >
+                  Save as New Style
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="w-full text-slate-400 hover:text-slate-200"
+                  size="sm"
+                  onClick={handleSetDefault}
+                  disabled={!activeStyleEntry}
+                >
+                  Set as Default
+                </Button>
+              </div>
             </div>
           </div>
         </ResizablePanel>
@@ -721,7 +786,7 @@ export default function StylePage() {
               <div className="flex h-full flex-col">
                 <div className="flex items-center justify-between px-3 py-2">
                   <h3 className="text-xs font-semibold text-slate-100">Styles</h3>
-                  <Button size="sm" variant="secondary" className="gap-1 h-7 text-[11px]" onClick={handleCreateStyle}>
+                  <Button size="sm" className="gap-1 h-7 text-[11px] bg-blue-600 hover:bg-blue-500 text-white" onClick={handleCreateStyle}>
                     <PlusCircle className="h-3.5 w-3.5" />
                     New
                   </Button>
@@ -807,6 +872,7 @@ export default function StylePage() {
                   </div>
                 </div>
 
+                <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
                 <ScrollArea className="flex-1">
                   <div className="space-y-1 px-2 pb-3">
                     {!drafts.length && (
@@ -820,50 +886,87 @@ export default function StylePage() {
                       const isApplied = draft.id === appliedDraftId;
 
                       return (
-                        <button
+                        <div
                           key={draft.id}
-                          type="button"
-                          className={`flex w-full items-center gap-2.5 rounded-md border px-2.5 py-1.5 transition ${
+                          className={`group flex w-full items-center gap-2.5 rounded-md border px-2.5 py-1.5 transition ${
                             isSelected
                               ? "border-emerald-500/70 bg-emerald-500/5"
                               : "border-slate-800 bg-slate-900/40 hover:border-slate-700"
                           }`}
-                          onClick={() => setCurrentDraftIndex(index)}
                         >
-                          <span className="flex-shrink-0 text-[11px] font-medium text-slate-300 w-12 text-left">
-                            #{draftNumber}
-                          </span>
-                          <div className="flex gap-1">
-                            {(draft.examples ?? []).slice(0, 3).map((src, imgIdx) => (
-                              <div
-                                key={imgIdx}
-                                className="h-10 w-10 flex-shrink-0 overflow-hidden rounded border border-slate-700 bg-slate-900"
-                              >
-                                <img
-                                  src={src}
-                                  alt={`Draft ${draftNumber} img ${imgIdx + 1}`}
-                                  className="h-full w-full object-cover"
+                          <button
+                            type="button"
+                            className="flex flex-1 items-center gap-2.5 min-w-0"
+                            onClick={() => setCurrentDraftIndex(index)}
+                          >
+                            <span className="flex-shrink-0 text-[11px] font-medium text-slate-300 w-8 text-left">
+                              #{draftNumber}
+                            </span>
+                            <div className="flex gap-1">
+                              {(draft.examples ?? []).slice(0, 3).map((src, imgIdx) => (
+                                <div
+                                  key={imgIdx}
+                                  className="h-10 w-10 flex-shrink-0 overflow-hidden rounded border border-slate-700 bg-slate-900"
+                                >
+                                  <img
+                                    src={src}
+                                    alt={`Draft ${draftNumber} img ${imgIdx + 1}`}
+                                    className="h-full w-full object-cover"
+                                  />
+                                </div>
+                              ))}
+                              {Array.from({ length: Math.max(0, 3 - (draft.examples?.length ?? 0)) }).map((_, i) => (
+                                <div
+                                  key={`empty-${i}`}
+                                  className="h-10 w-10 flex-shrink-0 rounded border border-slate-800 bg-slate-900/40"
                                 />
-                              </div>
-                            ))}
-                            {/* Fill empty slots if fewer than 3 images */}
-                            {Array.from({ length: Math.max(0, 3 - (draft.examples?.length ?? 0)) }).map((_, i) => (
-                              <div
-                                key={`empty-${i}`}
-                                className="h-10 w-10 flex-shrink-0 rounded border border-slate-800 bg-slate-900/40"
-                              />
-                            ))}
-                          </div>
-                          {isApplied && (
-                            <Badge className="ml-auto h-4 px-1.5 text-[9px] bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
-                              APPLIED
-                            </Badge>
-                          )}
-                        </button>
+                              ))}
+                            </div>
+                            {isApplied && (
+                              <span className="ml-auto flex-shrink-0 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-medium text-emerald-400">
+                                APPLIED
+                              </span>
+                            )}
+                          </button>
+                          <Button
+                            type="button"
+                            size="icon"
+                            variant="ghost"
+                            className="h-6 w-6 flex-shrink-0 opacity-0 transition group-hover:opacity-100 text-slate-500 hover:text-red-400"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              deleteDraft(draft.id);
+                            }}
+                          >
+                            <X className="h-3 w-3" />
+                          </Button>
+                        </div>
                       );
                     })}
                   </div>
                 </ScrollArea>
+
+                {/* Expandable: View Full Prompt */}
+                {activeDraft?.prompt && (
+                  <div className="flex-none border-t border-slate-800">
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-between px-3 py-2 text-[11px] text-slate-400 hover:text-slate-200 transition-colors"
+                      onClick={() => setPromptExpanded((p) => !p)}
+                    >
+                      <span className="font-medium">View Full Prompt</span>
+                      {promptExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                    </button>
+                    {promptExpanded && (
+                      <div className="max-h-40 overflow-auto px-3 pb-3">
+                        <p className="whitespace-pre-wrap text-[10px] leading-relaxed text-slate-400 font-mono">
+                          {activeDraft.prompt}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                </div>
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>

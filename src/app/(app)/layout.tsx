@@ -32,9 +32,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="h-screen flex flex-col bg-slate-950 text-slate-100 overflow-hidden">
       {/* Top nav */}
-      <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
+      <header className="flex-none sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
         <div className="flex h-14 items-center px-4 gap-4">
           <Link href="/dashboard" className="flex items-center gap-2 mr-6">
             <Clapperboard className="h-6 w-6 text-blue-500" />
@@ -100,7 +100,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <main>{children}</main>
+      <main className="flex-1 min-h-0 overflow-hidden">{children}</main>
     </div>
   );
 }

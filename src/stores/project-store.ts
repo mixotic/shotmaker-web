@@ -34,6 +34,7 @@ interface ProjectStore {
   updateProjectData: (updates: Partial<any>) => void;
   updateProjectName: (name: string) => void;
   saveProject: () => Promise<void>;
+  flushSave: () => Promise<void>;
 }
 
 let saveTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -101,6 +102,14 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
     });
     if (saveTimeout) clearTimeout(saveTimeout);
     saveTimeout = setTimeout(() => get().saveProject(), 1000);
+  },
+
+  flushSave: async () => {
+    if (saveTimeout) {
+      clearTimeout(saveTimeout);
+      saveTimeout = null;
+    }
+    await get().saveProject();
   },
 
   saveProject: async () => {

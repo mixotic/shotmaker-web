@@ -113,9 +113,9 @@ export default function ProjectLayout({
   }
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       {/* Toolbar */}
-      <div className="border-b border-slate-800 bg-slate-950/50">
+      <div className="flex-none border-b border-slate-800 bg-slate-950/50">
         <div className="flex items-center h-12 px-4 gap-4">
           <Button
             variant="ghost"
@@ -227,7 +227,9 @@ export default function ProjectLayout({
         </TooltipProvider>
       </div>
 
-      {children}
+      <div className="flex-1 min-h-0 overflow-hidden">
+        {children}
+      </div>
     </div>
   );
 }
