@@ -715,7 +715,7 @@ export default function StylePage() {
             </div>
 
             {/* Square preview images */}
-            <div className="grid grid-cols-3 gap-3 mx-auto w-full max-w-[600px]">
+            <div className="grid grid-cols-3 gap-3 w-full">
               {["Character", "Object", "Set"].map((label, index) => (
                 <div key={label} className="flex flex-col">
                   <div
@@ -881,7 +881,7 @@ export default function StylePage() {
                       </div>
                     )}
                     {drafts.map((draft, index) => {
-                      const draftNumber = drafts.length - index;
+                      const draftNumber = index + 1;
                       const isSelected = index === currentDraftIndex;
                       const isApplied = draft.id === appliedDraftId;
 
